@@ -2,7 +2,7 @@
 
 Get the official component here: https://code.google.com/p/foo-wsh-panel-mod/downloads/list
 
-If you know what you're doing, you can use my modded version: https://github.com/19379/foo_uie_wsh_panel_mod/releases/tag/v1.5.10
+If you know what you're doing, you can use my modded version: https://github.com/19379/foo_uie_wsh_panel_mod/releases
 
 After installing, make sure **Safe mode** is disabled. (File>Preferences>Tools>WSH Panel Mod)
 
