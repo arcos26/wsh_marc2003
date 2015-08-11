@@ -121,6 +121,7 @@ _.mixin({
 			//text 5000-5999
 			object && object.rbtn_up(x, y);
 			if (this.check_feature("custom_font")) {
+				this.fonts_menu.AppendMenuItem(MF_STRING, 10, 10);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 12, 12);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 14, 14);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 16, 16);
@@ -154,6 +155,7 @@ _.mixin({
 			switch (true) {
 			case idx == 0:
 				break;
+			case idx == 10:
 			case idx == 12:
 			case idx == 14:
 			case idx == 16:
