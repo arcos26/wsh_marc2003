@@ -117,8 +117,7 @@ _.mixin({
 			}
 			panel.m.AppendMenuItem(_.isFile(this.path) ? MF_STRING : MF_GRAYED, 2030, "Open containing folder");
 			panel.m.AppendMenuSeparator();
-			panel.s10.AppendMenuItem(panel.metadb ? MF_STRING : MF_GRAYED, 2040, "Google images");
-			panel.s10.AppendTo(panel.m, MF_STRING, "Cover search");
+			panel.m.AppendMenuItem(panel.metadb ? MF_STRING : MF_GRAYED, 2040, "Google image search");
 			panel.m.AppendMenuSeparator();
 		}
 		

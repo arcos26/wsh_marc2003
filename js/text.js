@@ -145,7 +145,7 @@ _.mixin({
 					panel.s10.AppendMenuItem(MF_STRING, i + 5110, item);
 				});
 				panel.s10.CheckMenuRadioItem(5110, 5121, this.bio_lastfm_site + 5110);
-				panel.s10.AppendTo(panel.m, MF_STRING, "Last.fm Site");
+				panel.s10.AppendTo(panel.m, MF_STRING, "Last.fm site");
 				panel.m.AppendMenuSeparator();
 				break;
 			case "text_reader":
