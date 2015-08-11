@@ -237,8 +237,6 @@ _.mixin({
 		}
 		
 		this.rbtn_up = function (x, y) {
-			if (!this.trace(x, y))
-				return;
 			switch (this.mode) {
 			case "autoplaylists":
 				panel.m.AppendMenuItem(this.editing ? MF_GRAYED: MF_STRING, 3000, "Add new autoplaylist...");

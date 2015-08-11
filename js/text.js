@@ -128,8 +128,6 @@ _.mixin({
 		}
 		
 		this.rbtn_up = function (x, y) {
-			if (!this.trace(x, y))
-				return;
 			switch (this.mode) {
 			case "allmusic":
 				panel.s10.AppendMenuItem(MF_STRING, 5000, "Artist...");

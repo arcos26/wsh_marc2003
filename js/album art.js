@@ -93,8 +93,6 @@ _.mixin({
 		}
 		
 		this.rbtn_up = function (x, y) {
-			if (!this.trace(x, y))
-				return;
 			panel.m.AppendMenuItem(MF_STRING, 2000, "Refresh");
 			panel.m.AppendMenuSeparator();
 			panel.m.AppendMenuItem(MF_STRING, 2001, "CD Jewel Case");
