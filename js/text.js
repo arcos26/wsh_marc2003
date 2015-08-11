@@ -377,7 +377,7 @@ _.mixin({
 				_.createFolder(folders.data);
 				_.createFolder(folders.artists);
 				this.bio_lastfm_sites = ["www.last.fm", "www.lastfm.de", "www.lastfm.es", "www.lastfm.fr", "www.lastfm.it", "www.lastfm.jp", "www.lastfm.pl", "www.lastfm.com.br", "www.lastfm.ru", "www.lastfm.se", "www.lastfm.tr", "cn.last.fm"];
-				this.bio_lastfm_site = window.GetProperty("2K3.TEXT.BIO.SITE", 0);
+				this.bio_lastfm_site = window.GetProperty("2K3.TEXT.BIO.LASTFM.SITE", 0);
 				break;
 			case "text_reader":
 				this.title_tf = window.GetProperty("2K3.TEXT.TITLE.TF", "$directory_path(%path%)");
