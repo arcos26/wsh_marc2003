@@ -126,7 +126,7 @@ _.mixin({
 				this.fonts_menu.AppendMenuItem(MF_STRING, 14, 14);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 16, 16);
 				this.fonts_menu.AppendTo(this.m, MF_STRING, "Font size");
-				this.fonts_menu.CheckMenuRadioItem(12, 16, this.fonts.size);
+				this.fonts_menu.CheckMenuRadioItem(10, 16, this.fonts.size);
 				this.m.AppendMenuSeparator();
 			}
 			if (this.check_feature("custom_background")) {
