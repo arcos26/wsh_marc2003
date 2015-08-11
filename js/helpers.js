@@ -507,7 +507,7 @@ _.mixin({
 		this.paint = function (gr, colour) {
 			gr.SetTextRenderingHint(4);
 			if (this.v())
-				gr.DrawString(this.t, this.guifx_font, colour || _.RGB(220, 220, 220), this.x, this.y, this.w, this.h, SF_CENTRE);
+				gr.DrawString(this.t, this.guifx_font, colour, this.x, this.y, this.w, this.h, SF_CENTRE);
 		}
 		
 		this.trace = function (x, y) {

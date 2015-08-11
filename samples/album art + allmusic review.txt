@@ -45,8 +45,8 @@ function on_paint(gr) {
 	} else if (np_hover) {
 		gr.FillSolidRect(0, 0, panel.w, 16, _.RGBA(0, 0, 0, 200));
 	}
-	close_btn.paint(gr);
-	show_btn.paint(gr);
+	close_btn.paint(gr, panel.colours.text);
+	show_btn.paint(gr, panel.colours.text);
 }
 
 function on_metadb_changed() {
