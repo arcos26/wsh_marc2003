@@ -151,7 +151,7 @@ _.mixin({
 		this.secret = this.read_ini("secret");
 		this.username = this.read_ini("username");
 		this.sk = this.read_ini("sk");
-		this.ua = "foobar2000_wsh_panel_mod_scripts +http://www.last.fm/user/marc2003";
+		this.ua = "foobar2000_wsh_panel_mod_scripts +https://github.com/19379/wsh_marc2003";
 		this.xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 });
