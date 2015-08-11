@@ -46,7 +46,7 @@ _.mixin({
 						return;
 					this.artist = temp_artist;
 					this.content = "";
-					this.filename = panel.new_artist_folder(this.artist) + "bio.lastfm.json";
+					this.filename = panel.new_artist_folder(this.artist) + "bio." + this.bio_lastfm_sites[this.bio_lastfm_site] + ".json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename));
 						this.content = data[0];
@@ -141,6 +141,12 @@ _.mixin({
 			case "lastfm_bio":
 				panel.m.AppendMenuItem(panel.metadb ? MF_STRING : MF_GRAYED, 5100, "Force update");
 				panel.m.AppendMenuSeparator();
+				_.forEach(this.bio_lastfm_sites, function (item, i) {
+					panel.s10.AppendMenuItem(MF_STRING, i + 5110, item);
+				});
+				panel.s10.CheckMenuRadioItem(5110, 5121, this.bio_lastfm_site + 5110);
+				panel.s10.AppendTo(panel.m, MF_STRING, "Last.fm Site");
+				panel.m.AppendMenuSeparator();
 				break;
 			case "text_reader":
 				panel.m.AppendMenuItem(MF_STRING, 5200, "Refresh");
@@ -180,6 +186,23 @@ _.mixin({
 				break;
 			case 5100:
 				this.get();
+				break;
+			case 5110:
+			case 5111:
+			case 5112:
+			case 5113:
+			case 5114:
+			case 5115:
+			case 5116:
+			case 5117:
+			case 5118:
+			case 5119:
+			case 5120:
+			case 5121:
+				this.bio_lastfm_site = idx - 5110;
+				window.SetProperty("2K3.TEXT.BIO.LASTFM.SITE", this.bio_lastfm_site);
+				this.artist = "";
+				panel.item_focus_change();
 				break;
 			case 5200:
 				this.filename = "";
@@ -250,7 +273,7 @@ _.mixin({
 			case "lastfm_bio":
 				if (!_.tagged(this.artist))
 					return;
-				url = "http://www.last.fm/music/" + encodeURIComponent(this.artist) + "/+wiki";
+				url = "http://" + this.bio_lastfm_sites[this.bio_lastfm_site] + "/music/" + encodeURIComponent(this.artist) + "/+wiki";
 				break;
 			default:
 				return;
@@ -353,6 +376,8 @@ _.mixin({
 			case "lastfm_bio":
 				_.createFolder(folders.data);
 				_.createFolder(folders.artists);
+				this.bio_lastfm_sites = ["www.last.fm", "www.lastfm.de", "www.lastfm.es", "www.lastfm.fr", "www.lastfm.it", "www.lastfm.jp", "www.lastfm.pl", "www.lastfm.com.br", "www.lastfm.ru", "www.lastfm.se", "www.lastfm.tr", "cn.last.fm"];
+				this.bio_lastfm_site = window.GetProperty("2K3.TEXT.BIO.SITE", 0);
 				break;
 			case "text_reader":
 				this.title_tf = window.GetProperty("2K3.TEXT.TITLE.TF", "$directory_path(%path%)");
