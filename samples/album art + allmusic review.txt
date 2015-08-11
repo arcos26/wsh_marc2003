@@ -1,0 +1,128 @@
+// ==PREPROCESSOR==
+// @name "Album Art + Allmusic Review"
+// @author "marc2003"
+// @feature "v1.4"
+// @feature "watch-metadb"
+// @import "%fb2k_profile_path%wsh_marc2003\js\lodash.min.js"
+// @import "%fb2k_profile_path%wsh_marc2003\js\helpers.js"
+// @import "%fb2k_profile_path%wsh_marc2003\js\panel.js"
+// @import "%fb2k_profile_path%wsh_marc2003\js\album art.js"
+// @import "%fb2k_profile_path%wsh_marc2003\js\text.js"
+// ==/PREPROCESSOR==
+
+var panel = new _.panel("Album Art + Allmusic Review", ["metadb", "custom_background", "custom_font"]);
+var text = new _.text("allmusic", 0, 0, 0, 0);
+var art = new _.art(0, 0, 0, 0);
+
+var np_hover = false;
+var np_timer = false;
+var np_text = window.GetProperty("2K3.NP.TEXT", false);
+var close_btn = new _.sb(guifx.close, 0, 0, 16, 16, function () { return np_text; }, function () { show(false); });
+var show_btn = new _.sb(guifx.down, 0, 0, 16, 16, function () { return !np_text && np_hover; }, function () { show(true); });
+
+panel.item_focus_change();
+
+function on_size() {
+	panel.size();
+	art.w = panel.w;
+	art.h = panel.h;
+	text.x = 10;
+	text.y = np_text ? 0 : panel.h;
+	text.w = panel.w - 20;
+	text.h = panel.h - text.y;
+	text.size();
+	close_btn.x = panel.w - close_btn.w;
+	show_btn.x = panel.w - show_btn.w;
+}
+
+function on_paint(gr) {
+	panel.colours.text = _.RGB(230, 230, 230); //hack because of dark overlay
+	panel.paint(gr);
+	art.paint(gr);
+	if (np_text) {
+		_.drawOverlay(gr, text.x - 10, text.y, text.w + 20, text.h);
+		text.paint(gr);
+	} else if (np_hover) {
+		gr.FillSolidRect(0, 0, panel.w, 16, _.RGBA(0, 0, 0, 200));
+	}
+	close_btn.paint(gr);
+	show_btn.paint(gr);
+}
+
+function on_metadb_changed() {
+	art.metadb_changed();
+	text.metadb_changed();
+}
+
+function on_get_album_art_done(m, id, im, p) {
+	art.get_album_art_done(p);
+}
+
+function on_mouse_wheel(s) {
+	if (np_text && text.wheel(s))
+		return;
+	art.wheel(s);
+}
+
+function on_mouse_move(x, y) {
+	if (np_text) {
+		if (close_btn.move(x, y))
+			return;
+		text.move(x, y);
+	} else {
+		if (!np_hover) {
+			np_hover = true;
+			if (np_timer)
+				window.ClearTimeout(np_timer);
+			window.RepaintRect(0, 0, panel.w, 16);
+		}
+		if (show_btn.move(x, y))
+			return;
+		art.move(x, y);
+	}
+}
+
+function on_mouse_leave() {
+	np_timer = window.SetTimeout(function () {
+		np_hover = false;
+		np_timer = false;
+		window.RepaintRect(0, 0, panel.w, 16);
+	}, 1000);
+}
+
+function on_mouse_lbtn_up(x, y) {
+	if (close_btn.lbtn_up(x, y))
+		return;
+	if (show_btn.lbtn_up(x, y))
+		return;
+	if (np_text && text.lbtn_up(x, y))
+		return;
+}
+
+function on_mouse_lbtn_dblclk(x, y) {
+	if (!np_text)
+		art.lbtn_dblclk(x, y);
+}
+
+function on_mouse_rbtn_up(x, y) {
+	return panel.rbtn_up(x, y, np_text ? text : art);
+}
+
+function on_key_down(k) {
+	if (np_text) {
+		if (k == VK_ESCAPE)
+			show(false);
+		else
+			text.key_down(k);
+	} else {
+		art.key_down(k);
+	}
+}
+
+function show(s) {
+	_.tt("");
+	np_text = s;
+	window.SetProperty("2K3.NP.TEXT", np_text);
+	on_size();
+	window.Repaint();
+}
