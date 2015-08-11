@@ -84,7 +84,6 @@ _.mixin({
 				}
 				break;
 			case "properties":
-				this.text_x = _.round(this.w * 0.3);
 				this.text_width = this.w - this.text_x;
 				for (var i = 0; i < Math.min(this.items, this.rows); i++) {
 					gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.text_x - 10, panel.row_height, LEFT);
@@ -594,6 +593,7 @@ _.mixin({
 				}
 				break;
 			case "properties":
+				this.text_x = 0;
 				this.filename = panel.metadb.Path;
 				var fileinfo = panel.metadb.GetFileInfo();
 				this.add_meta(fileinfo);
@@ -604,7 +604,8 @@ _.mixin({
 				this.add_rg();
 				_.forEach(this.data, function (item) {
 					item.width = _.textWidth(item.value, panel.fonts.normal);
-				});
+					this.text_x = Math.max(this.text_x, _.textWidth(item.name, panel.fonts.normal) + 20);
+				}, this);
 				fileinfo.Dispose();
 				this.items = this.data.length;
 				break;
@@ -980,7 +981,7 @@ _.mixin({
 						for (var j = 0; j < num; j++) {
 							var value = panel.tf("$meta(" + name + "," + j +")").replace(/\s{2,}/g, " ");
 							this.data.push({
-								name : (num == 1 || j == 0 ? name.toUpperCase() : ""),
+								name : num == 1 || j == 0 ? name.toUpperCase() : "",
 								value : value,
 								query : name.toLowerCase() + (num == 1 ? " IS " : " HAS ") + value
 							});
