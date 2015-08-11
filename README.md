@@ -19,7 +19,7 @@ you can acquire from this page: http://www.last.fm/api/accounts
 While the API KEY has to be set inside the script, all other script configuration options can be found
 on the right click menu.
 
-I'm not taking feature requests and I'm not restoring any missing scripts or features missing from previous packages. Genuine bugs can be reported here:
+I'm not taking feature requests and I'm not restoring any scripts or features missing from previous packages. Genuine bugs can be reported here:
 
 https://github.com/19379/wsh_marc2003/issues
 
