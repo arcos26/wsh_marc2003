@@ -16,10 +16,7 @@ var lastfm = new _.lastfm();
 //lastfm.secret = "abc123"; //and edit accordingly
 var list = new _.list("lastfm_info", 10, 24, 0, 0);
 
-if (list.lastfm_mode == 0)
-	panel.item_focus_change();
-else
-	list.update();
+panel.item_focus_change();
 
 function on_notify_data(name, data) {
 	lastfm.notify_data(name, data);

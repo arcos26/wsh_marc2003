@@ -10,8 +10,6 @@
 var panel = new _.panel("Autoplaylists", ["custom_font"]);
 var list = new _.list("autoplaylists", 10, 24, 0, 0);
 
-list.update();
-
 function on_size() {
 	panel.size();
 	list.w = panel.w - 20;
