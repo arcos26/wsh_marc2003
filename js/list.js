@@ -601,6 +601,7 @@ _.mixin({
 				this.add_properties(fileinfo);
 				this.add_customdb();
 				this.add_stats();
+				this.add_rg();
 				_.forEach(this.data, function (item) {
 					item.width = _.textWidth(item.value, panel.fonts.normal);
 				});
@@ -1032,6 +1033,11 @@ _.mixin({
 						this.add();
 						this.add(["PLAY_COUNT", "FIRST_PLAYED", "LAST_PLAYED", "ADDED", "RATING"]);
 					}
+				}
+				
+				this.add_rg = function () {
+					this.add();
+					this.add(["REPLAYGAIN_ALBUM_GAIN", "REPLAYGAIN_ALBUM_PEAK", "REPLAYGAIN_TRACK_GAIN", "REPLAYGAIN_TRACK_PEAK"]);
 				}
 				
 				this.add = function (names) {
