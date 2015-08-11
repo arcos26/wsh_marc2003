@@ -1,5 +1,5 @@
 _.mixin({
-	art : function (x, y, w, h) {
+	album_art : function (x, y, w, h) {
 		this.paint = function (gr) {
 			if (this.cd) {
 				if (this.shadow)

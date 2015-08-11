@@ -12,7 +12,7 @@
 
 var panel = new _.panel("Album Art + Allmusic Review", ["metadb", "custom_background", "custom_font"]);
 var text = new _.text("allmusic", 0, 0, 0, 0);
-var art = new _.art(0, 0, 0, 0);
+var album_art = new _.album_art(0, 0, 0, 0);
 
 var np_hover = false;
 var np_timer = false;
@@ -24,8 +24,8 @@ panel.item_focus_change();
 
 function on_size() {
 	panel.size();
-	art.w = panel.w;
-	art.h = panel.h;
+	album_art.w = panel.w;
+	album_art.h = panel.h;
 	text.x = 10;
 	text.y = np_text ? 0 : panel.h;
 	text.w = panel.w - 20;
@@ -38,7 +38,7 @@ function on_size() {
 function on_paint(gr) {
 	panel.colours.text = _.RGB(230, 230, 230); //hack because of dark overlay
 	panel.paint(gr);
-	art.paint(gr);
+	album_art.paint(gr);
 	if (np_text) {
 		_.drawOverlay(gr, text.x - 10, text.y, text.w + 20, text.h);
 		text.paint(gr);
@@ -50,18 +50,18 @@ function on_paint(gr) {
 }
 
 function on_metadb_changed() {
-	art.metadb_changed();
+	album_art.metadb_changed();
 	text.metadb_changed();
 }
 
 function on_get_album_art_done(m, id, im, p) {
-	art.get_album_art_done(p);
+	album_art.get_album_art_done(p);
 }
 
 function on_mouse_wheel(s) {
 	if (np_text && text.wheel(s))
 		return;
-	art.wheel(s);
+	album_art.wheel(s);
 }
 
 function on_mouse_move(x, y) {
@@ -78,7 +78,7 @@ function on_mouse_move(x, y) {
 		}
 		if (show_btn.move(x, y))
 			return;
-		art.move(x, y);
+		album_art.move(x, y);
 	}
 }
 
@@ -101,11 +101,11 @@ function on_mouse_lbtn_up(x, y) {
 
 function on_mouse_lbtn_dblclk(x, y) {
 	if (!np_text)
-		art.lbtn_dblclk(x, y);
+		album_art.lbtn_dblclk(x, y);
 }
 
 function on_mouse_rbtn_up(x, y) {
-	return panel.rbtn_up(x, y, np_text ? text : art);
+	return panel.rbtn_up(x, y, np_text ? text : album_art);
 }
 
 function on_key_down(k) {
@@ -115,7 +115,7 @@ function on_key_down(k) {
 		else
 			text.key_down(k);
 	} else {
-		art.key_down(k);
+		album_art.key_down(k);
 	}
 }
 
