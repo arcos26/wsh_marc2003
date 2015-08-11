@@ -851,7 +851,6 @@ _.mixin({
 				_.createFolder(folders.artists);
 				_.createFolder(folders.settings);
 				this.ua = lastfm.ua;
-				this.mode = "lastfm_info";
 				this.lastfm_mode = window.GetProperty("2K3.LIST.LASTFM.MODE", 0); //0 artist 1 charts 2 recommendations
 				this.lastfm_artist_methods = [{
 						method : "artist.getSimilar",
@@ -1053,8 +1052,6 @@ _.mixin({
 						this.data.push({"name" : "", "value" : "", "query" : ""});
 					}
 				}
-				
-				this.mode = "properties";
 				break;
 			}
 		}
