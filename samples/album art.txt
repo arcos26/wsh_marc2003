@@ -10,45 +10,45 @@
 // ==/PREPROCESSOR==
 
 var panel = new _.panel("Album Art", ["metadb", "custom_background"]);
-var album_art = new _.album_art(0, 0, 0, 0);
+var albumart = new _.albumart(0, 0, 0, 0);
 
 panel.item_focus_change();
 
 function on_size() {
 	panel.size();
-	album_art.w = panel.w;
-	album_art.h = panel.h;
+	albumart.w = panel.w;
+	albumart.h = panel.h;
 }
 
 function on_paint(gr) {
 	panel.paint(gr);
-	album_art.paint(gr);
+	albumart.paint(gr);
 }
 
 function on_metadb_changed() {
-	album_art.metadb_changed();
+	albumart.metadb_changed();
 }
 
 function on_get_album_art_done(m, id, im, p) {
-	album_art.get_album_art_done(p);
+	albumart.get_album_art_done(p);
 }
 
 function on_mouse_wheel(s) {
-	album_art.wheel(s);
+	albumart.wheel(s);
 }
 
 function on_mouse_move(x, y) {
-	album_art.move(x, y);
+	albumart.move(x, y);
 }
 
 function on_mouse_lbtn_dblclk(x, y) {
-	album_art.lbtn_dblclk(x, y);
+	albumart.lbtn_dblclk(x, y);
 }
 
 function on_mouse_rbtn_up(x, y) {
-	return panel.rbtn_up(x, y, album_art);
+	return panel.rbtn_up(x, y, albumart);
 }
 
 function on_key_down(k) {
-	album_art.key_down(k);
+	albumart.key_down(k);
 }
