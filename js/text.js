@@ -259,21 +259,21 @@ _.mixin({
 		}
 		
 		this.get = function () {
-			var url, f = this.filename;
+			var f = this.filename;
 			switch (this.mode) {
 			case "allmusic":
 				if (this.allmusic_url) {
-					url = this.allmusic_url;
+					var url = this.allmusic_url;
 				} else {
 					if (!_.tagged(this.artist) || !_.tagged(this.album))
 						return;
-					url = "http://www.allmusic.com/search/albums/" + encodeURIComponent(this.album + (this.artist.toLowerCase() == "various artists" ? "" : " " + this.artist));
+					var url = "http://www.allmusic.com/search/albums/" + encodeURIComponent(this.album + (this.artist.toLowerCase() == "various artists" ? "" : " " + this.artist));
 				}
 				break;
 			case "lastfm_bio":
 				if (!_.tagged(this.artist))
 					return;
-				url = "http://" + this.bio_lastfm_sites[this.bio_lastfm_site] + "/music/" + encodeURIComponent(this.artist) + "/+wiki";
+				var url = "http://" + this.bio_lastfm_sites[this.bio_lastfm_site] + "/music/" + encodeURIComponent(this.artist) + "/+wiki";
 				break;
 			default:
 				return;
@@ -307,18 +307,17 @@ _.mixin({
 					panel.item_focus_change();
 				} else {
 					this.allmusic_url = "";
-					var artist, album, divs, url, temp;
 					_(_.getElementsByTagName(this.xmlhttp.responsetext, "li"))
 						.filter({"className" : "album"})
 						.forEach(function (item) {
-							divs = item.getElementsByTagName("div");
-							album = divs[2].getElementsByTagName("a")[0].innerText;
-							url = divs[2].getElementsByTagName("a")[0].href;
-							temp = divs[3].getElementsByTagName("a");
+							var divs = item.getElementsByTagName("div");
+							var album = divs[2].getElementsByTagName("a")[0].innerText;
+							var url = divs[2].getElementsByTagName("a")[0].href;
+							var temp = divs[3].getElementsByTagName("a");
 							if (temp.length > 0)
-								artist = temp[0].innerText;
+								var artist = temp[0].innerText;
 							else
-								artist = "various artists";
+								var artist = "various artists";
 							if (this.is_match(artist, album)) {
 								this.allmusic_url = url;
 								return false;

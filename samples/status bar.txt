@@ -11,7 +11,7 @@ var left_text_tf = "%playback_time%[ / %length%] :: %__bitrate% kbps %codec% [%c
 
 if (window.InstanceType) { //default UI
 	window.MinHeight = window.MaxHeight = 20;
-	var bg = utils.GetSysColor(15);
+	var bg = _.RGB(240, 240, 240);
 	var colour = _.RGB(0, 0, 0);
 } else { //columns UI
 	var bg = _.RGB(40, 40, 40);
@@ -23,8 +23,6 @@ var font = _.gdiFont("Segoe UI", 11);
 var ww = 0;
 var wh = 0;
 var count = 0;
-var length = 0;
-var size = 0;
 var right_text = "";
 var right_text_width = 0;
 refresh();
@@ -121,8 +119,8 @@ function on_playlist_switch() {
 function refresh() {
 	var items = plman.GetPlaylistItems(plman.ActivePlaylist);
 	count = items.Count;
-	size = 0;
-	length = 0;
+	var size = 0;
+	var length = 0;
 	for (var i = 0; i < count; i++) {
 		size += _.parseInt(_.tf("$if2(%filesize%,0)", items.item(i)));
 		length += Math.max(items.item(i).Length, 0);

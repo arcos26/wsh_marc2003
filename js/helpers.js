@@ -122,10 +122,9 @@ _.mixin({
 		exts = exts.toLowerCase();
 		var files = [];
 		if (_.isFolder(folder)) {
-			var path;
 			var e = new Enumerator(fso.GetFolder(folder).Files);
 			for (; !e.atEnd(); e.moveNext()) {
-				path = e.item().Path;
+				var path = e.item().Path;
 				if (exts.indexOf(path.split(".").pop().toLowerCase()) > -1)
 					files.push(path);
 			}
