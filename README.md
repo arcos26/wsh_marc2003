@@ -6,9 +6,11 @@ If you know what you're doing, you can use my modded version: https://github.com
 
 After installing, make sure **Safe mode** is disabled. (File>Preferences>Tools>WSH Panel Mod)
 
-Download the zip file from the link just to the right. Extract folder contents in to your foobar2000 profile folder, 
+Download the latest zip from here: https://github.com/19379/wsh_marc2003/releases
+
+Extract the **wsh_marc2003** folder in to your foobar2000 profile folder, 
 usually located at **%appdata%\foobar2000**. If using portable mode then the folder should go inside the main
-foobar2000 folder. Rename the folder so it's named **wsh_marc2003**
+foobar2000 folder.
 
 Add a WSH panel to your layout. Check your UI documentation for how to do this. Right click the panel>**Configure**
 and replace the editor contents with the text of any sample you'd like to try from the **wsh_marc2003\samples** folder.
