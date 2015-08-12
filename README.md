@@ -39,6 +39,8 @@ There is no update option on the right click menu. Future updates will come as a
 
 **Musicbrainz** now requires a [musicbrainz artist id](https://musicbrainz.org/doc/MusicBrainz_Identifier) tag in your files. It no longer performs artist lookups if it's missing. It can be filled in by using **Musicbrainz Picard** or **foo_musicbrainz**. Also, it no longer has filtering options but instead groups by release type which is much easier to read and it should show more than it did before.
 
+**Properties** now splits multi-value tags so each one is clickable to create autoplaylists. Also, playback statistics and replaygain values are displayed.
+
 **Playcount sync** and **Thumbs** are not included.
 
 
