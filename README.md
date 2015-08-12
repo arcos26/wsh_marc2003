@@ -27,11 +27,13 @@ https://github.com/19379/wsh_marc2003/issues
 
 ##Changes from previous versions
 
-**Autoplaylists** - Now stores data in a different format not compatible with earlier versions. Also, most right click options have been removed in favour of using all the defaults.
+**Autoplaylists** now stores data in a different format not compatible with earlier versions. Also, most right click options have been removed in favour of using all the defaults.
 
 **CD Jewel Case** is now merged with **Album art** in a single script where the CD case can be toggled on or off. (Default is off)
 
 **Last.fm Similar Artists** and **Last.fm Charts** have been merged in to a single script. **User recommendations** have also been added and it requires you set your Last.fm password because it requires authentication. If you find yourself not needing to enter a password, it's because you have an older version of **Playcount sync** which is already authenticated.
+
+**Musicbrainz** now requires a [musicbrainz artist id](https://musicbrainz.org/doc/MusicBrainz_Identifier) tag in your files. It no longer performs artist lookups if it's missing. It can be filled in by using **Musicbrainz Picard** or **foo_musicbrainz**.
 
 **Playcount sync** and **Thumbs** are not included.
 
