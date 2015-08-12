@@ -41,6 +41,8 @@ There is no update option on the right click menu. Future updates will come as a
 
 **Properties** now splits multi-value tags so each one is clickable to create autoplaylists. Also, playback statistics and replaygain values are displayed.
 
+New **Status Bar** script displays playlist length, track count and total size. Colours can be customised inside the script itself. Volume can be changed by scrolling your mouse wheel over it and double clicking will jump to the currently playing track if it's not already selected.
+
 **Playcount sync** and **Thumbs** are not included.
 
 
