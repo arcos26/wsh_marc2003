@@ -9,11 +9,11 @@ var left_text_tf = "%playback_time%[ / %length%] :: %__bitrate% kbps %codec% [%c
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if (window.InstanceType) {
+if (window.InstanceType) { //default UI
 	window.MinHeight = window.MaxHeight = 20;
 	var bg = utils.GetSysColor(15);
 	var colour = _.RGB(0, 0, 0);
-} else {
+} else { //columns UI
 	var bg = _.RGB(40, 40, 40);
 	var colour = _.RGB(255, 255, 255);
 }
