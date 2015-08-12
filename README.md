@@ -27,6 +27,8 @@ https://github.com/19379/wsh_marc2003/issues
 
 ##Changes from previous versions
 
+There is no update option on the right click menu. Future updates will come as a whole zip where you should extract the contents AND update scripts inside each panel.
+
 **Autoplaylists** now stores data in a different format not compatible with earlier versions. Also, most right click options have been removed in favour of using all the defaults.
 
 **CD Jewel Case** is now merged with **Album art** in a single script where the CD case can be toggled on or off. (Default is off)
