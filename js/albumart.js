@@ -195,10 +195,10 @@ _.mixin({
 		this.cd = window.GetProperty("2K3.ARTREADER.CD", false);
 		this.shadow = window.GetProperty("2K3.ARTREADER.SHADOW", false);
 		this.gloss = window.GetProperty("2K3.ARTREADER.GLOSS", false);
-		this.shadow_img = gdi.Image(folders.images + "cd\\shadow.png");
-		this.case_img = gdi.Image(folders.images + "cd\\case.png");
-		this.semi_img = gdi.Image(folders.images + "cd\\semi.png");
-		this.gloss_img = gdi.Image(folders.images + "cd\\gloss.png");
+		this.shadow_img = _.img("cd\\shadow.png");
+		this.case_img = _.img("cd\\case.png");
+		this.semi_img = _.img("cd\\semi.png");
+		this.gloss_img = _.img("cd\\gloss.png");
 		this.img = null;
 		this.path = null;
 		this.hover = false;

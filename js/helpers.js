@@ -93,6 +93,9 @@ var ha_links = [
 ];
 
 _.mixin({
+	img : function (value) {
+		return gdi.Image(folders.images + value);
+	},
 	nest : function (collection, keys) {
 		if (!keys.length) {
 			return collection;
@@ -454,8 +457,8 @@ _.mixin({
 		this.h = h;
 		this.fn = fn;
 		this.tiptext = tiptext;
-		this.img_normal = gdi.Image(folders.images + img_src.normal);
-		this.img_hover = img_src.hover ? gdi.Image(folders.images + img_src.hover) : this.img_normal;
+		this.img_normal = _.img(img_src.normal);
+		this.img_hover = img_src.hover ? _.img(img_src.hover) : this.img_normal;
 		this.img = this.img_normal;
 	},
 	buttons : function () {
