@@ -33,9 +33,9 @@ There is no update option on the right click menu. Future updates will come as a
 
 **CD Jewel Case** is now merged with **Album art** in a single script where the CD case can be toggled on or off. (Default is off)
 
-**Last.fm Similar Artists** and **Last.fm Charts** have been merged in to a single script. **User recommendations** have also been added and it requires you set your Last.fm password because it requires authentication. If you find yourself not needing to enter a password, it's because you have an older version of **Playcount sync** which is already authenticated.
+**Last.fm Similar Artists** and **Last.fm Charts** have been merged in to a single script. **User recommendations** have also been added and you'll need to set your Last.fm password because it requires authentication. If you find yourself not needing to enter a password, it's because you have an older version of **Playcount sync** which is already authenticated.
 
-**Musicbrainz** now requires a [musicbrainz artist id](https://musicbrainz.org/doc/MusicBrainz_Identifier) tag in your files. It no longer performs artist lookups if it's missing. It can be filled in by using **Musicbrainz Picard** or **foo_musicbrainz**.
+**Musicbrainz** now requires a [musicbrainz artist id](https://musicbrainz.org/doc/MusicBrainz_Identifier) tag in your files. It no longer performs artist lookups if it's missing. It can be filled in by using **Musicbrainz Picard** or **foo_musicbrainz**. Also, it no longer has filtering options but instead groups by release type which is much easier to read and it should show more than it did before.
 
 **Playcount sync** and **Thumbs** are not included.
 
