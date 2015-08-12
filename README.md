@@ -12,6 +12,8 @@ Extract the **wsh_marc2003** folder in to your foobar2000 profile folder,
 usually located at **%appdata%\foobar2000**. If using portable mode then the folder should go inside the main
 foobar2000 folder.
 
+Install the **Guifx v2 Transports.ttf** font that is inside the **wsh_marc2003** folder.
+
 Add a WSH panel to your layout. Check your UI documentation for how to do this. Right click the panel>**Configure**
 and replace the editor contents with the text of any sample you'd like to try from the **wsh_marc2003\samples** folder.
 
