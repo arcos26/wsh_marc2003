@@ -505,6 +505,10 @@ _.mixin({
 					}
 					break;
 				case 2:
+					if (lastfm.secret.length != 32) {
+						panel.console("Last.fm SECRET not set.");
+						break;
+					}
 					if (lastfm.sk.length != 32) {
 						panel.console("Password not set.");
 						break;
