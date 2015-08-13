@@ -55,10 +55,10 @@ _.mixin({
 					break;
 				case 2:
 					this.text_x = 0;
-					this.text_width = this.w;
+					this.text_width = _.round(this.w / 2);
 					for (var i = 0; i < Math.min(this.items, this.rows); i++) {
 						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
-						gr.GdiDrawText(this.data[i + this.offset].similar, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.w, panel.row_height, RIGHT);
+						gr.GdiDrawText(this.data[i + this.offset].similar, panel.fonts.normal, panel.colours.highlight, this.text_width + 20, this.y + 15 + (i * panel.row_height), this.w - this.text_width - 10, panel.row_height, RIGHT);
 					}
 					break;
 				}
