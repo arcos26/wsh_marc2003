@@ -50,10 +50,8 @@ _.mixin({
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename));
 						this.content = data[0];
-						/*wait until last.fm change their site before enabling this again
 						if (_.fileExpired(this.filename, ONE_DAY))
 							this.get();
-						*/
 					} else {
 						this.get();
 					}
@@ -336,11 +334,17 @@ _.mixin({
 				}
 				break;
 			case "lastfm_bio":
-				var content = _(_.getElementsByTagName(this.xmlhttp.responsetext, "div"))
-					.filter({"id" : "wiki"})
-					.map("innerText")
-					.stripTags([0])
-					.value();
+				var data = _.getElementsByTagName(this.xmlhttp.responsetext, "div")
+				var tmp = _.filter(data, {"id" : "wiki"});
+				if (tmp.length == 1) { //old site
+					var content = _.stripTags(_.map(tmp, "innerText"));
+				} else { //try new site
+					tmp = _.filter(data, {"className" : "wiki-content"});
+					if (tmp.length == 1)
+						var content = _.stripTags(_.map(tmp, "innerHTML"));
+					else 
+						var content = "";
+				}
 				_.save(JSON.stringify([content]), f);
 				this.artist = "";
 				panel.item_focus_change();
