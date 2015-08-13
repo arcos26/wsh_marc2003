@@ -50,8 +50,10 @@ _.mixin({
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename));
 						this.content = data[0];
+						/*wait until last.fm change their site before enabling this again
 						if (_.fileExpired(this.filename, ONE_DAY))
 							this.get();
+						*/
 					} else {
 						this.get();
 					}
