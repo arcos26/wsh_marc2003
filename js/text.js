@@ -334,17 +334,13 @@ _.mixin({
 				}
 				break;
 			case "lastfm_bio":
-				var data = _.getElementsByTagName(this.xmlhttp.responsetext, "div");
-				var tmp = _.filter(data, {"id" : "wiki"});
-				if (tmp.length == 1) { //old site
-					var content = _.stripTags(_.map(tmp, "innerText"));
-				} else { //try new site
-					tmp = _.filter(data, {"className" : "wiki-content"});
-					if (tmp.length == 1)
-						var content = _.stripTags(_.map(tmp, "innerHTML"));
-					else 
-						var content = "";
-				}
+				var content = _(_.getElementsByTagName(this.xmlhttp.responsetext, "div"))
+					.filter(function (item) {
+						return item.id == "wiki" || item.className == "wiki-content";
+					})
+					.map("innerHTML")
+					.stripTags()
+					.value();
 				_.save(JSON.stringify([content]), f);
 				this.artist = "";
 				panel.item_focus_change();
