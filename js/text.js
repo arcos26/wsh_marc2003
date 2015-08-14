@@ -299,7 +299,7 @@ _.mixin({
 					var content = _(_.getElementsByTagName(this.xmlhttp.responsetext, "div"))
 						.filter({"itemprop" : "reviewBody"})
 						.map("innerText")
-						.stripTags([0])
+						.stripTags()
 						.value();
 					panel.console(content.length > 0 ? "A review was found and saved." : "No review was found on the page for this album.");
 					_.save(JSON.stringify([content]), f);
@@ -334,7 +334,7 @@ _.mixin({
 				}
 				break;
 			case "lastfm_bio":
-				var data = _.getElementsByTagName(this.xmlhttp.responsetext, "div")
+				var data = _.getElementsByTagName(this.xmlhttp.responsetext, "div");
 				var tmp = _.filter(data, {"id" : "wiki"});
 				if (tmp.length == 1) { //old site
 					var content = _.stripTags(_.map(tmp, "innerText"));
