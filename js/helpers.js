@@ -148,7 +148,7 @@ _.mixin({
 	stripTags : function (value) {
 		doc.open();
 		var div = doc.createElement("div");
-		div.innerHTML = value.toString().replace(/<P[^>]*>/g, "").replace(/<\/P>/g, "<br>").replace(/\n/g, "<br>");
+		div.innerHTML = value.toString().replace(/<[Pp][^>]*>/g, "").replace(/<\/[Pp]>/g, "<br>").replace(/\n/g, "<br>");
 		value = _.trim(div.innerText);
 		doc.close();
 		return value;
