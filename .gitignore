@@ -1,7 +1,6 @@
 js/ps.js
-js/thumbs.js
+js/thumbs.online.js
 samples/extras/
-samples/thumbs.txt
 download.vbs
 lastfm_sql.cmd
 sqlite3.exe
