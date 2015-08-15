@@ -27,9 +27,11 @@ I'm not taking feature requests and I'm not restoring any scripts or features mi
 
 https://github.com/19379/wsh_marc2003/issues
 
-##Changes from previous versions
+##Updates
 
-There is no update option on the right click menu. Future updates will come as a whole zip where you should extract the contents AND update scripts inside each panel.
+Unlike previous versions, updates must be downloaded manually. Just extract the whole **wsh_marc2003** folder and overwrite the old one. On the rare occurrence a script inside a panel needs updating, it will be mentioned on the releases page.
+
+##Changes from previous versions
 
 **Autoplaylists** now stores data in a different format not compatible with earlier versions. Also, most right click options have been removed in favour of using all the defaults.
 
