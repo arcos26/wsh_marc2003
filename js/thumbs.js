@@ -445,9 +445,7 @@ _.mixin({
 		_.createFolder(folders.artists);
 		this.mx = 0;
 		this.my = 0;
-		this.artist = "";
 		this.folder = "";
-		this.default_file = "";
 		this.files = [];
 		this.images = [];
 		this.exts = "jpg|jpeg|png|gif";
