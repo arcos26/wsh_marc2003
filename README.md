@@ -45,6 +45,8 @@ Unlike previous versions, updates must be downloaded manually. Just extract the 
 
 New **Status Bar** script displays playlist length, track count and total size. Colours can be customised inside the script itself. Volume can be changed by scrolling your mouse wheel over it and double clicking will jump to the currently playing track if it's not already selected.
 
-**Playcount sync** and **Thumbs** are not included.
+**Thumbs** does not have any ability to download images. It only displays them from a custom folder.
+
+**Playcount sync** is not included.
 
 
