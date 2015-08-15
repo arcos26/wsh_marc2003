@@ -443,7 +443,6 @@ _.mixin({
 		
 		_.createFolder(folders.data);
 		_.createFolder(folders.artists);
-		_.createFolder(folders.settings);
 		this.mx = 0;
 		this.my = 0;
 		this.artist = "";
