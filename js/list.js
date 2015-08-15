@@ -40,17 +40,17 @@ _.mixin({
 					}
 					break;
 				case 1:
-					this.text_x = gr.CalcTextWidth("000.", panel.fonts.normal) + 5;
-					this.text_width = _.round(this.w / 2.75);
+					this.text_x = this.spacer_w + 5;
+					this.text_width = _.round(this.w / 2);
 					var lastfm_charts_bar_x = this.x + this.text_x + this.text_width + 10;
-					var unit_width = (this.w - lastfm_charts_bar_x - 50) / this.data[0].playcount;
+					var unit_width = (this.w - lastfm_charts_bar_x - 60) / this.data[0].playcount;
 					var bar_colour = _.splitRGB(this.lastfm_charts_colour);
 					for (var i = 0; i < Math.min(this.items, this.rows); i++) {
 						var bar_width = _.ceil(unit_width * this.data[i + this.offset].playcount);
 						gr.GdiDrawText(this.data[i + this.offset].rank + ".", panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.text_x - 5, panel.row_height, RIGHT);
 						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
 						gr.FillSolidRect(lastfm_charts_bar_x, this.y + 17 + (i * panel.row_height), bar_width, panel.row_height - 3, bar_colour);
-						gr.GdiDrawText(_.formatNumber(this.data[i + this.offset].playcount, ","), panel.fonts.normal, panel.colours.text, lastfm_charts_bar_x + bar_width + 5, this.y + 15 + (i * panel.row_height), 50, panel.row_height, LEFT);
+						gr.GdiDrawText(_.formatNumber(this.data[i + this.offset].playcount, ","), panel.fonts.normal, panel.colours.text, lastfm_charts_bar_x + bar_width + 5, this.y + 15 + (i * panel.row_height), 60, panel.row_height, LEFT);
 					}
 					break;
 				case 2:
@@ -66,7 +66,7 @@ _.mixin({
 			case "musicbrainz":
 				if (this.mb_mode == 0) {
 					this.text_x = 0;
-					this.text_width = this.w - gr.CalcTextWidth("0000", panel.fonts.normal) - 10;
+					this.text_width = this.w - this.spacer_w - 10;
 					for (var i = 0; i < Math.min(this.items, this.rows); i++) {
 						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, this.data[i + this.offset].width == 0 ? panel.colours.highlight : panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
 						gr.GdiDrawText(this.data[i + this.offset].date, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.w, panel.row_height, RIGHT);
@@ -425,6 +425,7 @@ _.mixin({
 			this.offset = 0;
 			this.index = 0;
 			this.data = [];
+			this.spacer_w = _.textWidth("0000", panel.fonts.normal);
 			switch (this.mode) {
 			case "autoplaylists":
 				this.data = _.jsonParse(_.open(this.filename));
@@ -455,6 +456,7 @@ _.mixin({
 				}
 				break;
 			case "lastfm_info":
+				this.filename = "";
 				if (lastfm.api_key.length != 32) {
 					panel.console("Last.fm API KEY not set.");
 					break;
@@ -604,7 +606,6 @@ _.mixin({
 				}
 				break;
 			case "properties":
-				this.text_x = 0;
 				this.filename = panel.metadb.Path;
 				var fileinfo = panel.metadb.GetFileInfo();
 				this.add_meta(fileinfo);
@@ -1078,6 +1079,7 @@ _.mixin({
 		this.offset = 0;
 		this.items = 0;
 		this.text_x = 0;
+		this.spacer_w = 0;
 		this.artist = "";
 		this.filename = "";
 		this.up_btn = new _.sb(guifx.up, this.x, this.y, 15, 15, _.bind(function () { return this.offset > 0; }, this), _.bind(function () { this.wheel(1); }, this));
