@@ -481,6 +481,10 @@ _.mixin({
 					}
 					break;
 				case 1:
+					if (lastfm.username.length == 0) {
+						panel.console("Last.fm Username not set.");
+						break;
+					}
 					this.filename = folders.data + "lastfm\\" + lastfm.username + "." + this.lastfm_charts_methods[this.lastfm_charts_method].method + "." + this.lastfm_charts_periods[this.lastfm_charts_period].period + ".json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename), this.lastfm_charts_methods[this.lastfm_charts_method].json);
@@ -508,8 +512,12 @@ _.mixin({
 						panel.console("Last.fm SECRET not set.");
 						break;
 					}
+					if (lastfm.username.length == 0) {
+						panel.console("Last.fm Username not set.");
+						break;
+					}
 					if (lastfm.sk.length != 32) {
-						panel.console("Password not set.");
+						panel.console("Last.fm Password not set.");
 						break;
 					}
 					this.filename = folders.data + "lastfm\\" + lastfm.username + ".user.getRecommendedArtists.json";
@@ -630,8 +638,6 @@ _.mixin({
 						return;
 					url = lastfm.get_base_url() + "&limit=100&method=" + this.lastfm_artist_methods[this.lastfm_artist_method].method + "&artist=" + encodeURIComponent(this.artist);
 				} else {
-					if (lastfm.username.length == 0)
-						return panel.console("Username not set.");
 					url = lastfm.get_base_url() + "&limit=100&method=" + this.lastfm_charts_methods[this.lastfm_charts_method].method + "&period=" + this.lastfm_charts_periods[this.lastfm_charts_period].period + "&user=" + lastfm.username;
 				}
 				break;

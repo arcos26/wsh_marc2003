@@ -30,6 +30,8 @@ _.mixin({
 				return panel.console("Last.fm API KEY not set.");
 			if (this.secret.length != 32)
 				return panel.console("Last.fm SECRET not set.");
+			if (this.username.length == 0)
+				return panel.console("Last.fm Username not set.");
 			switch (method) {
 			case "auth.getMobileSession":
 				this.authToken = md5(this.username + md5(this.password));
@@ -38,12 +40,10 @@ _.mixin({
 				break;
 			case "track.love":
 			case "track.unlove":
+				if (this.sk.length != 32)
+					return panel.console("Last.fm Password not set.");
 				if (!metadb)
 					return;
-				if (this.username.length == 0)
-					return panel.console("Username not set.");
-				if (this.sk.length != 32)
-					return panel.console("Password not set.");
 				this.artist = _.tf("%artist%", metadb);
 				this.track = _.tf("%title%", metadb);
 				if (!_.tagged(this.artist) || !_.tagged(this.track))
@@ -54,10 +54,8 @@ _.mixin({
 				this.data = "sk=" + this.sk + "&artist=" + encodeURIComponent(this.artist) + "&track=" + encodeURIComponent(this.track);
 				break;
 			case "user.getRecommendedArtists":
-				if (this.username.length == 0)
-					return panel.console("Username not set.");
 				if (this.sk.length != 32)
-					return panel.console("Password not set.");
+					return panel.console("Last.fm Password not set.");
 				this.api_sig = md5("api_key" + this.api_key + "limit250method" + method + "sk" + this.sk + this.secret);
 				this.data = "limit=250&sk=" + this.sk;
 				break;
@@ -151,7 +149,7 @@ _.mixin({
 		this.secret = this.read_ini("secret");
 		this.username = this.read_ini("username");
 		this.sk = this.read_ini("sk");
-		this.ua = "foobar2000_wsh_panel_mod_scripts +https://github.com/19379/wsh_marc2003";
+		this.ua = "foobar2000_wsh_panel_mod scripts";
 		this.xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 });
