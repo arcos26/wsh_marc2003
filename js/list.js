@@ -286,8 +286,8 @@ _.mixin({
 					panel.m.AppendMenuSeparator();
 					break;
 				}
-				panel.m.AppendMenuItem(MF_STRING, 3150, "Last.fm username...");
-				panel.m.AppendMenuItem(lastfm.username.length > 0 ? MF_STRING : MF_GRAYED, 3151, "Last.fm password...");
+				panel.m.AppendMenuItem(lastfm.api_key.length == 32 ? MF_STRING : MF_GRAYED, 3150, "Last.fm username...");
+				panel.m.AppendMenuItem(lastfm.api_key.length == 32 && lastfm.secret.length == 32 && lastfm.username.length > 0 ? MF_STRING : MF_GRAYED, 3151, "Last.fm password...");
 				panel.m.AppendMenuSeparator();
 				break;
 			case "musicbrainz":
