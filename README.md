@@ -34,7 +34,7 @@ https://github.com/19379/wsh_marc2003/issues
 
 ##Updates
 
-Unlike previous versions, updates must be downloaded manually. Just extract the whole **wsh_marc2003** folder and overwrite the old one. On the rare occassion a script inside a panel needs updating, it will be mentioned on the releases page.
+Unlike previous versions, updates must be downloaded manually. Just extract the whole **wsh_marc2003** folder and overwrite the old one. On the rare occasion a script inside a panel needs updating, it will be mentioned on the releases page.
 
 ##Changes from previous versions
 
