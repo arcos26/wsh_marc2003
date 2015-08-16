@@ -1,12 +1,16 @@
 # wsh_marc2003
 
-Get the official component here: https://code.google.com/p/foo-wsh-panel-mod/downloads/list
+These are a bunch of scripts I've made for the **foobar2000** music player and **WSH panel mod** component. 
 
-If you know what you're doing, you can use my modded version: https://github.com/19379/foo_uie_wsh_panel_mod/releases
+http://www.foobar2000.org
+
+https://code.google.com/p/foo-wsh-panel-mod/downloads/list
+
+http://wiki.hydrogenaud.io/index.php?title=Foobar2000:How_to_install_a_component
 
 After installing, make sure **Safe mode** is disabled. (File>Preferences>Tools>WSH Panel Mod)
 
-Download the latest zip from here: https://github.com/19379/wsh_marc2003/releases
+Download my latest zip from here: https://github.com/19379/wsh_marc2003/releases
 
 Extract the **wsh_marc2003** folder in to your foobar2000 profile folder, 
 usually located at **%appdata%\foobar2000**. If using portable mode then the folder should go inside the main
@@ -23,13 +27,14 @@ you can acquire from this page: http://www.last.fm/api/accounts
 While the API KEY has to be set inside the script, all other script configuration options can be found
 on the right click menu.
 
-I'm not taking feature requests and I'm not restoring any scripts or features missing from previous packages. Genuine bugs can be reported here:
+I'm not taking feature requests and I'm not restoring any scripts or features missing from previous packages. If you
+find a bug that can be reproduced, you can report it here:
 
 https://github.com/19379/wsh_marc2003/issues
 
 ##Updates
 
-Unlike previous versions, updates must be downloaded manually. Just extract the whole **wsh_marc2003** folder and overwrite the old one. On the rare occurrence a script inside a panel needs updating, it will be mentioned on the releases page.
+Unlike previous versions, updates must be downloaded manually. Just extract the whole **wsh_marc2003** folder and overwrite the old one. On the rare occassion a script inside a panel needs updating, it will be mentioned on the releases page.
 
 ##Changes from previous versions
 
@@ -48,5 +53,3 @@ New **Status Bar** script displays playlist length, track count and total size. 
 **Thumbs** does not have any ability to download images. It only displays them from a custom folder.
 
 **Playcount sync** is not included.
-
-
