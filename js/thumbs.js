@@ -408,12 +408,7 @@ _.mixin({
 				} catch (e) {
 				}
 			});
-			this.files = _.getFiles(this.folder, this.exts);
-			if (this.files.length > 1 && this.sort == 0) {//newest first
-				this.files = _.sortByOrder(this.files, function (item) {
-					return _.lastModified(item);
-				}, "desc");
-			}
+			this.files = _.getFiles(this.folder, this.exts, this.sort == 0);
 			this.images = _.map(this.files, function (item) {
 				return gdi.Image(item);
 			});

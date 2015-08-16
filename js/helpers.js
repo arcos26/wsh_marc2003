@@ -118,7 +118,7 @@ _.mixin({
 		if (!_.isFolder(folder))
 			fso.CreateFolder(folder);
 	},
-	getFiles : function (folder, exts) {
+	getFiles : function (folder, exts, newest_first) {
 		exts = exts.toLowerCase();
 		var files = [];
 		if (_.isFolder(folder)) {
@@ -129,9 +129,15 @@ _.mixin({
 					files.push(path);
 			}
 		}
-		return _.sortBy(files, function (item) {
-			return item.toLowerCase();
-		});
+		if (newest_first) {
+			return _.sortByOrder(files, function (item) {
+				return _.lastModified(item);
+			}, "desc");
+		} else {
+			return _.sortBy(files, function (item) {
+				return item.toLowerCase();
+			});
+		}
 	},
 	shortPath : function (file) {
 		return fso.GetFile(file).ShortPath;
