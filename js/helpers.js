@@ -678,3 +678,7 @@ _.mixin({
 		s2.Dispose();
 	}
 });
+
+function on_script_unload() {
+	_.tt("");
+}
