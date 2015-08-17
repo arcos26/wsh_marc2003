@@ -34,38 +34,38 @@ _.mixin({
 				return panel.console("Last.fm Username not set.");
 			switch (method) {
 			case "auth.getMobileSession":
-				this.api_sig = md5("api_key" + this.api_key + "method" + method + "password" + this.password + "username" + this.username + this.secret);
-				this.data = "password=" + this.password + "&username=" + this.username;
+				var api_sig = md5("api_key" + this.api_key + "method" + method + "password" + this.password + "username" + this.username + this.secret);
+				var data = "password=" + this.password + "&username=" + this.username;
 				break;
 			case "track.love":
 			case "track.unlove":
-				if (this.sk.length != 32)
-					return panel.console("Last.fm Password not set.");
 				if (!metadb)
 					return;
-				this.artist = _.tf("%artist%", metadb);
-				this.track = _.tf("%title%", metadb);
-				if (!_.tagged(this.artist) || !_.tagged(this.track))
+				if (this.sk.length != 32)
+					return panel.console("Last.fm Password not set.");
+				var artist = _.tf("%artist%", metadb);
+				var track = _.tf("%title%", metadb);
+				if (!_.tagged(artist) || !_.tagged(track))
 					return;
-				panel.console("Attempting to " + (method == "track.love" ? "love \"" : "unlove \"") + this.track + "\" by \"" + this.artist + "\"");
+				panel.console("Attempting to " + (method == "track.love" ? "love \"" : "unlove \"") + track + "\" by \"" + artist + "\"");
 				panel.console("Contacting Last.fm....");
-				this.api_sig = md5("api_key" + this.api_key + "artist" + this.artist + "method" + method + "sk" + this.sk + "track" + this.track + this.secret);
-				this.data = "sk=" + this.sk + "&artist=" + encodeURIComponent(this.artist) + "&track=" + encodeURIComponent(this.track);
+				var api_sig = md5("api_key" + this.api_key + "artist" + artist + "method" + method + "sk" + this.sk + "track" + track + this.secret);
+				var data = "sk=" + this.sk + "&artist=" + encodeURIComponent(artist) + "&track=" + encodeURIComponent(track);
 				break;
 			case "user.getRecommendedArtists":
 				if (this.sk.length != 32)
 					return panel.console("Last.fm Password not set.");
-				this.api_sig = md5("api_key" + this.api_key + "limit250method" + method + "sk" + this.sk + this.secret);
-				this.data = "limit=250&sk=" + this.sk;
+				var api_sig = md5("api_key" + this.api_key + "limit250method" + method + "sk" + this.sk + this.secret);
+				var data = "limit=250&sk=" + this.sk;
 				break;
 			default:
 				return;
 			}
-			this.data += "&format=json&method=" + method + "&api_key=" + this.api_key + "&api_sig=" + this.api_sig;
+			data += "&format=json&method=" + method + "&api_key=" + this.api_key + "&api_sig=" + api_sig;
 			this.xmlhttp.open("POST", "https://ws.audioscrobbler.com/2.0/", true);
 			this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			this.xmlhttp.setRequestHeader("User-Agent", this.ua);
-			this.xmlhttp.send(this.data);
+			this.xmlhttp.send(data);
 			this.xmlhttp.onreadystatechange = _.bind(function () {
 				if (this.xmlhttp.readyState == 4) {
 					if (this.xmlhttp.status == 200)
