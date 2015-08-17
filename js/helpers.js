@@ -550,7 +550,7 @@ _.mixin({
 		this.fn = fn;
 		this.guifx_font = _.gdiFont(guifx.font, this.h - 6, 0);
 	},
-	menu : function (x, y) {
+	menu : function (x, y, flags) {
 		var m1 = window.CreatePopupMenu();
 		var s1 = window.CreatePopupMenu();
 		var s2 = window.CreatePopupMenu();
@@ -586,10 +586,10 @@ _.mixin({
 			m1.AppendMenuSeparator();
 			m1.AppendMenuItem(MF_STRING, 1, "Switch UI");
 		}
-		var idx = m1.TrackPopupMenu(x, y);
+		var idx = m1.TrackPopupMenu(x, y, flags);
 		switch (true) {
 		case idx == 0:
-			break;;
+			break;
 		case idx == 1:
 			fb.RunMainMenuCommand("View/Switch to UI/" + (window.InstanceType ? "Columns UI" : "Default User Interface"));
 			break;
