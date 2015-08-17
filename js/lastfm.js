@@ -34,9 +34,8 @@ _.mixin({
 				return panel.console("Last.fm Username not set.");
 			switch (method) {
 			case "auth.getMobileSession":
-				this.authToken = md5(this.username + md5(this.password));
-				this.api_sig = md5("api_key" + this.api_key + "authToken" + this.authToken + "method" + method + "username" + this.username + this.secret);
-				this.data = "authToken=" + this.authToken + "&username=" + this.username;
+				this.api_sig = md5("api_key" + this.api_key + "method" + method + "password" + this.password + "username" + this.username + this.secret);
+				this.data = "password=" + this.password + "&username=" + this.username;
 				break;
 			case "track.love":
 			case "track.unlove":
