@@ -46,7 +46,7 @@ _.mixin({
 						return;
 					this.artist = temp_artist;
 					this.content = "";
-					this.filename = panel.new_artist_folder(this.artist) + "bio." + this.bio_lastfm_sites[this.bio_lastfm_site] + ".json";
+					this.filename = panel.new_artist_folder(this.artist) + "bio." + _.fbSanitise(this.bio_lastfm_sites[this.bio_lastfm_site]) + ".json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename));
 						this.content = data[0];
@@ -375,7 +375,7 @@ _.mixin({
 			case "lastfm_bio":
 				_.createFolder(folders.data);
 				_.createFolder(folders.artists);
-				this.bio_lastfm_sites = ["www.last.fm", "www.lastfm.de", "www.lastfm.es", "www.lastfm.fr", "www.lastfm.it", "www.lastfm.jp", "www.lastfm.pl", "www.lastfm.com.br", "www.lastfm.ru", "www.lastfm.se", "www.lastfm.tr", "cn.last.fm"];
+				this.bio_lastfm_sites = ["www.last.fm", "www.last.fm/de", "www.last.fm/es", "www.last.fm/fr", "www.last.fm/it", "www.last.fm/ja", "www.last.fm/pl", "www.last.fm/pt", "www.last.fm/ru", "www.last.fm/sv", "www.last.fm/tr", "www.last.fm/zh"];
 				this.bio_lastfm_site = window.GetProperty("2K3.TEXT.BIO.LASTFM.SITE", 0);
 				break;
 			case "text_reader":
