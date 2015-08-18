@@ -1,10 +1,16 @@
 # wsh_marc2003
 
+## Overview
+
 These are a bunch of scripts I've made for the **foobar2000** music player and **WSH panel mod** component. 
 
 http://www.foobar2000.org
 
 https://code.google.com/p/foo-wsh-panel-mod/downloads/list
+
+I've added a few screenshots to the [wiki](https://github.com/19379/wsh_marc2003/wiki) to show some of the scripts that are available and the options they have. Browse the [samples](https://github.com/19379/wsh_marc2003/tree/master/samples) folder to see a list of them all.
+
+## Installation
 
 http://wiki.hydrogenaud.io/index.php?title=Foobar2000:How_to_install_a_component
 
