@@ -335,9 +335,7 @@ _.mixin({
 				break;
 			case "lastfm_bio":
 				var content = _(_.getElementsByTagName(this.xmlhttp.responsetext, "div"))
-					.filter(function (item) {
-						return item.id == "wiki" || item.className == "wiki-content";
-					})
+					.filter({"className" : "wiki-content"})
 					.map("innerHTML")
 					.stripTags()
 					.value();

@@ -41,9 +41,9 @@ _.mixin({
 					break;
 				case 1:
 					this.text_x = this.spacer_w + 5;
-					this.text_width = _.round(this.w / 2);
+					this.text_width = _.round(this.w / 2) + 30;
 					var lastfm_charts_bar_x = this.x + this.text_x + this.text_width + 10;
-					var unit_width = (this.w - lastfm_charts_bar_x - 60) / this.data[0].playcount;
+					var unit_width = (this.w - lastfm_charts_bar_x - 40) / this.data[0].playcount;
 					var bar_colour = _.splitRGB(this.lastfm_charts_colour);
 					for (var i = 0; i < Math.min(this.items, this.rows); i++) {
 						var bar_width = _.ceil(unit_width * this.data[i + this.offset].playcount);
