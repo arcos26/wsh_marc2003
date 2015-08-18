@@ -11,7 +11,7 @@
 // ==/PREPROCESSOR==
 
 var panel = new _.panel("Album Art + Allmusic Review", ["metadb", "custom_background", "custom_font"]);
-var text = new _.text("allmusic", 0, 0, 0, 0);
+var text = new _.text("allmusic", 10, 24, 0, 0);
 var albumart = new _.albumart(0, 0, 0, 0);
 
 var np_hover = false;
@@ -27,7 +27,7 @@ function on_size() {
 	albumart.w = panel.w;
 	albumart.h = panel.h;
 	text.x = 10;
-	text.y = np_text ? 0 : panel.h;
+	text.y = np_text ? 24 : panel.h;
 	text.w = panel.w - 20;
 	text.h = panel.h - text.y;
 	text.size();
@@ -37,10 +37,12 @@ function on_size() {
 
 function on_paint(gr) {
 	panel.colours.text = _.RGB(230, 230, 230); //hack because of dark overlay
+	panel.colours.highlight = _.RGB(200, 200, 200);
 	panel.paint(gr);
 	albumart.paint(gr);
 	if (np_text) {
-		_.drawOverlay(gr, text.x - 10, text.y, text.w + 20, text.h);
+		_.drawOverlay(gr, 0, 0, panel.w, panel.h);
+		gr.GdiDrawText(text.header_text(), panel.fonts.title, panel.colours.highlight, 10, 8, panel.w - 20, 24, LEFT);
 		text.paint(gr);
 	} else if (np_hover) {
 		gr.FillSolidRect(0, 0, panel.w, 16, _.RGBA(0, 0, 0, 200));
