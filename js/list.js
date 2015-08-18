@@ -1,7 +1,7 @@
 _.mixin({
 	list : function (mode, x, y, w, h) {
 		this.size = function () {
-			this.rows = _.floor((this.h - 30) / (this.mode == "echonest" ? 90 : panel.row_height));
+			this.rows = _.floor((this.h - 30) / panel.row_height);
 			this.index = 0;
 			this.offset = 0;
 			this.up_btn.x = this.x + _.round((this.w - 15) / 2);
@@ -24,10 +24,14 @@ _.mixin({
 				}
 				break;
 			case "echonest":
+				this.text_width = this.w - 110;
 				for (var i = 0; i < Math.min(this.items, this.rows); i++) {
-					gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.title, panel.colours.highlight, this.x, this.y + 15 + (i * 90), this.w - 110, 24, LEFT);
-					gr.GdiDrawText(this.data[i + this.offset].date, panel.fonts.title, panel.colours.highlight, this.x, this.y + 15 + (i * 90), this.w, 24, RIGHT);
-					gr.GdiDrawText(this.data[i + this.offset].summary, this.font, panel.colours.text, this.x, this.y + 37 + (i * 90), this.w, (this.font.Height * _.floor(64 / this.font.Height)) + 3, DT_WORDBREAK | DT_CALCRECT | DT_NOPREFIX);
+					if (this.data[i + this.offset].width > 0) {
+						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.title, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
+						gr.GdiDrawText(this.data[i + this.offset].date, panel.fonts.title, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.w, panel.row_height, RIGHT);
+					} else {
+						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.w, panel.row_height, LEFT);
+					}
 				}
 				break;
 			case "lastfm_info":
@@ -128,7 +132,7 @@ _.mixin({
 		this.wheel = function (s) {
 			if (this.trace(this.mx, this.my)) {
 				if (this.items > this.rows) {
-					var offset = this.offset - (s * (this.mode == "echonest" ? 1 : 5));
+					var offset = this.offset - (s * 6);
 					if (offset < 0)
 						offset = 0;
 					if (offset + this.rows > this.items)
@@ -147,7 +151,7 @@ _.mixin({
 		this.move = function (x, y) {
 			this.mx = x;
 			this.my = y;
-			this.index = _.floor((y - this.y - 15) / (this.mode == "echonest" ? 90 : panel.row_height)) + this.offset;
+			this.index = _.floor((y - this.y - 15) / panel.row_height) + this.offset;
 			this.in_range = this.index >= this.offset && this.index < this.offset + Math.min(this.rows, this.items);
 			switch (true) {
 			case !this.trace(x, y):
@@ -181,7 +185,6 @@ _.mixin({
 				this.hover = true;
 				window.RepaintRect(this.x + this.w - 20, this.y, 20, this.h);
 				break;
-			case this.mode == "echonest":
 			case x > this.x + this.text_x && x < this.x + this.text_x + Math.min(this.data[this.index].width, this.text_width):
 				window.SetCursor(IDC_HAND);
 				_.tt(this.mode == "properties" ? "Autoplaylist: " + this.data[this.index].query : this.data[this.index].url);
@@ -220,7 +223,6 @@ _.mixin({
 					break;
 				}
 				break;
-			case this.mode == "echonest":
 			case x > this.x + this.text_x && x < this.x + this.text_x + Math.min(this.data[this.index].width, this.text_width):
 				if (this.mode == "properties") {
 					fb.CreateAutoPlaylist(fb.PlaylistCount, this.data[this.index].name, this.data[this.index].query);
@@ -437,16 +439,12 @@ _.mixin({
 				this.filename = panel.new_artist_folder(this.artist) + "echonest.json";
 				if (_.isFile(this.filename)) {
 					var data = _.jsonParse(_.open(this.filename), "response.artist." + this.echonest_modes[this.echonest_mode]);
-					this.data = _.map(data, function (item, i) {
-						var temp_date = (item.date_posted || item.date_reviewed || item.date_found || "").substring(0, 10);
-						var temp_summary = _.stripTags(item.summary);
-						return {
-							name : _.stripTags(item.name).replace(/\s{2,}/g, " "),
-							date : temp_date,
-							url : (item.url || "").replace(/\\/g, ""),
-							summary : temp_summary.length > 0 ? temp_summary : "<no summary>"
-						};
-					});
+					_.forEach(data, function (item, i) {
+						var name = _.stripTags(item.name).replace(/\s{2,}/g, " ");
+						this.data.push({name : name, date : (item.date_posted || item.date_reviewed || item.date_found || "").substring(0, 10), url : (item.url || "").replace(/\\/g, ""), width : _.textWidth(name, panel.fonts.title)});
+						this.data.push({name : _.stripTags(item.summary), date : "", url : "", width : 0});
+						this.data.push({name : "", date : "", url : "", width : 0});
+					}, this);
 					this.items = this.data.length;
 					if (_.fileExpired(this.filename, ONE_DAY))
 						this.get();
