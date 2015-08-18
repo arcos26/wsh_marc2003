@@ -55,10 +55,9 @@ _.mixin({
 					break;
 				case 2:
 					this.text_x = 0;
-					this.text_width = _.round(this.w * 0.35);
+					this.text_width = this.w;
 					for (var i = 0; i < Math.min(this.items, this.rows); i++) {
-						gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
-						gr.GdiDrawText(this.data[i + this.offset].similar, panel.fonts.normal, panel.colours.highlight, this.text_width + 20, this.y + 15 + (i * panel.row_height), this.w - this.text_width - 10, panel.row_height, RIGHT);
+						gr.GdiDrawText(this.data[i + this.offset].name, this.data[i + this.offset].width > 0 ? panel.fonts.title : panel.fonts.normal, panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
 					}
 					break;
 				}
@@ -527,17 +526,13 @@ _.mixin({
 						var data = _.jsonParse(_.open(this.filename), "recommendations.artist");
 						if (_.isUndefined(data.length))
 							data = [data];
-						this.data = _.map(data, function (item) {
+						_.forEach(data, function (item) {
 							if (_.isUndefined(item.context.artist.length))
 								item.context.artist = [item.context.artist];
-							var similar = _.map(item.context.artist, "name").join(", ");
-							return {
-								name : item.name,
-								width : _.textWidth(item.name, panel.fonts.normal),
-								url : item.url,
-								similar : similar
-							};
-						});
+							this.data.push({name : item.name, width : _.textWidth(item.name, panel.fonts.title), url : item.url});
+							this.data.push({name : "Similar to: " + _.map(item.context.artist, "name").join(", "), width : 0, url : ""});
+							this.data.push({name : "", width : 0, url : ""});
+						}, this);
 						this.items = this.data.length;
 						if (_.fileExpired(this.filename, ONE_DAY))
 							lastfm.post("user.getRecommendedArtists");
