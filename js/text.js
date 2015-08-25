@@ -286,7 +286,7 @@ _.mixin({
 					if (this.xmlhttp.status == 200)
 						this.success(f);
 					else
-						panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
+						panel.console("HTTP error: " + this.xmlhttp.status);
 				}
 			}, this);
 		}
