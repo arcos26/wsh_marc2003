@@ -92,6 +92,12 @@ _.mixin({
 					gr.GdiDrawText(this.data[i + this.offset].value, panel.fonts.normal, panel.colours.text, this.x + this.text_x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
 				}
 				break;
+			default:
+				this.text_width = this.w;
+				for (var i = 0; i < Math.min(this.items, this.rows); i++) {
+					gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
+				}
+				break;
 			}
 			this.up_btn.paint(gr, panel.colours.text);
 			this.down_btn.paint(gr, panel.colours.text);
