@@ -95,7 +95,7 @@ _.mixin({
 			default:
 				this.text_width = this.w;
 				for (var i = 0; i < Math.min(this.items, this.rows); i++) {
-					gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.highlight, this.x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
+					gr.GdiDrawText(this.data[i + this.offset].name, panel.fonts.normal, panel.colours.text, this.x, this.y + 15 + (i * panel.row_height), this.text_width, panel.row_height, LEFT);
 				}
 				break;
 			}
