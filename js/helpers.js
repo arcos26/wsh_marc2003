@@ -286,7 +286,7 @@ _.mixin({
 		return result;
 	},
 	drawOverlay : function (gr, x, y, w, h) {
-		gr.FillGradRect(x, y, w, h, 90, _.RGBA(0, 0, 0, 225), _.RGBA(0, 0, 0, 175));
+		gr.FillGradRect(x, y, w, h, 90, _.RGBA(0, 0, 0, 200), _.RGBA(0, 0, 0, 170));
 	},
 	drawImage : function (gr, img, src_x, src_y, src_w, src_h, aspect, border, alpha) {
 		if (!img)
