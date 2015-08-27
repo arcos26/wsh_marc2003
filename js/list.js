@@ -469,7 +469,7 @@ _.mixin({
 					this.filename = panel.new_artist_folder(this.artist) + "lastfm." + this.lastfm_artist_methods[this.lastfm_artist_method].method + ".json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename), this.lastfm_artist_methods[this.lastfm_artist_method].json);
-						if (!data.length)
+						if (_.isUndefined(data.length))
 							data = [data];
 						this.data = _.map(data, function (item) {
 							return {
@@ -493,7 +493,7 @@ _.mixin({
 					this.filename = folders.data + "lastfm\\" + lastfm.username + "." + this.lastfm_charts_methods[this.lastfm_charts_method].method + "." + this.lastfm_charts_periods[this.lastfm_charts_period].period + ".json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename), this.lastfm_charts_methods[this.lastfm_charts_method].json);
-						if (!data.length)
+						if (_.isUndefined(data.length))
 							data = [data];
 						for (var i = 0; i < data.length; i++) {
 							var name = this.lastfm_charts_method == 0 ? data[i].name : data[i].artist.name + " - " + data[i].name;
@@ -529,10 +529,10 @@ _.mixin({
 					this.filename = folders.data + "lastfm\\" + lastfm.username + ".user.getRecommendedArtists.json";
 					if (_.isFile(this.filename)) {
 						var data = _.jsonParse(_.open(this.filename), "recommendations.artist");
-						if (!data.length)
+						if (_.isUndefined(data.length))
 							data = [data];
 						_.forEach(data, function (item) {
-							if (!item.context.artist.length)
+							if (_.isUndefined(item.context.artist.length))
 								item.context.artist = [item.context.artist];
 							this.data.push({name : item.name, width : _.textWidth(item.name, panel.fonts.title), url : item.url});
 							this.data.push({name : "Similar to: " + _.map(item.context.artist, "name").join(", "), width : 0, url : ""});
@@ -693,7 +693,7 @@ _.mixin({
 				if (data.error)
 					return panel.console(data.message);
 				var temp = _.jsonParse(this.xmlhttp.responsetext, this.lastfm_artist_methods[this.lastfm_artist_method].json);
-				if (!temp.length)
+				if (_.isUndefined(temp.length))
 					temp = [temp];
 				if (temp.length == 0)
 					return;
