@@ -10,7 +10,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\list.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Last.fm Artist Info/User Charts/Recommendations", ["metadb"]);
+var panel = new _.panel("Last.fm Artist Info/User Charts/Recommendations", ["metadb", "remap"]);
 var lastfm = new _.lastfm();
 //lastfm.api_key = "abc123"; //uncomment these 2 lines
 //lastfm.secret = "abc123"; //and edit accordingly
