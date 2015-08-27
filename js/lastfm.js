@@ -68,18 +68,26 @@ _.mixin({
 			this.xmlhttp.send(data);
 			this.xmlhttp.onreadystatechange = _.bind(function () {
 				if (this.xmlhttp.readyState == 4) {
-					if (this.xmlhttp.status == 200)
+					if (this.xmlhttp.status == 200) {
 						this.success(method, metadb);
-					else
-						panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
+					} else {
+						//should just be panel.console if last.fm was working properly
+						if (method == "auth.getMobileSession") {
+							var data = _.jsonParse(this.xmlhttp.responsetext);
+							if (data.error)
+								WshShell.popup(data.message, 0, panel.name, popup.stop);
+						} else {
+							panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
+						}
+					}
 				}
 			}, this);
 		}
 		
 		this.success = function (method, metadb) {
-			var data = _.jsonParse(this.xmlhttp.responsetext);
 			switch (method) {
 			case "auth.getMobileSession":
+				var data = _.jsonParse(this.xmlhttp.responsetext);
 				if (data.error) {
 					WshShell.popup(data.message, 0, panel.name, popup.stop);
 				} else if (data.session && data.session.key.length == 32) {
@@ -91,14 +99,24 @@ _.mixin({
 				break;
 			case "track.love":
 			case "track.unlove":
+				/*re-instate this if Last.fm start returning JSON again
+				var data = _.jsonParse(this.xmlhttp.responsetext);
 				if (data.error) {
 					panel.console(data.message);
 				} else if (data.status == "ok") {
 					panel.console("Track " + (method == "track.love" ? "loved successfully." : "unloved successfully."));
 					fb.RunContextCommandWithMetadb("Customdb Love " + (method == "track.love" ? 1 : 0), metadb, 8);
 				}
+				*/
+				if (this.xmlhttp.responsetext.indexOf("ok") > -1) {
+					panel.console("Track " + (method == "track.love" ? "loved successfully." : "unloved successfully."));
+					fb.RunContextCommandWithMetadb("Customdb Love " + (method == "track.love" ? 1 : 0), metadb, 8);
+				} else {
+					panel.console(this.xmlhttp.responsetext);
+				}
 				break;
 			case "user.getRecommendedArtists":
+				var data = _.jsonParse(this.xmlhttp.responsetext);
 				if (data.error) {
 					WshShell.popup(data.message, 0, panel.name, popup.stop);
 				} else {
