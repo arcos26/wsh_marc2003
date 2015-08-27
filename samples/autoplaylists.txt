@@ -7,7 +7,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\list.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Autoplaylists", ["custom_font"]);
+var panel = new _.panel("Autoplaylists");
 var list = new _.list("autoplaylists", 10, 24, 0, 0);
 
 function on_size() {

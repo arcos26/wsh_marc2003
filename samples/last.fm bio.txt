@@ -9,7 +9,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\text.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Last.fm Bio", ["metadb", "remap", "custom_font"]);
+var panel = new _.panel("Last.fm Bio", ["metadb", "remap"]);
 var text = new _.text("lastfm_bio", 10, 24, 0, 0);
 
 panel.item_focus_change();

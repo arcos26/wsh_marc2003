@@ -68,15 +68,13 @@ _.mixin({
 			this.fonts.normal = _.gdiFont(this.fonts.name, this.fonts.size);
 			this.fonts.fixed = _.gdiFont("Lucida Console", this.fonts.size);
 			this.row_height = this.fonts.normal.Height;
-			if (this.check_feature("custom_font")) {
-				_.forEach(this.list_objects, function (item) {
-					item.size();
-					item.update();
-				});
-				_.forEach(this.text_objects, function (item) {
-					item.size();
-				});
-			}
+			_.forEach(this.list_objects, function (item) {
+				item.size();
+				item.update();
+			});
+			_.forEach(this.text_objects, function (item) {
+				item.size();
+			});
 			window.Repaint();
 		}
 		
@@ -120,7 +118,7 @@ _.mixin({
 			//playcount sync 4000-4999
 			//text 5000-5999
 			object && object.rbtn_up(x, y);
-			if (this.check_feature("custom_font")) {
+			if (this.list_objects.length + this.text_objects.length > 0) {
 				this.fonts_menu.AppendMenuItem(MF_STRING, 10, 10);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 12, 12);
 				this.fonts_menu.AppendMenuItem(MF_STRING, 14, 14);

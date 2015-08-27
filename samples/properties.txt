@@ -9,7 +9,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\list.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Properties", ["metadb", "custom_font"]);
+var panel = new _.panel("Properties", ["metadb"]);
 var list = new _.list("properties", 10, 24, 0, 0);
 
 panel.item_focus_change();

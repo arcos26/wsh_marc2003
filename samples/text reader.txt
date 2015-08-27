@@ -9,7 +9,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\text.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Text Reader", ["metadb", "custom_font"]);
+var panel = new _.panel("Text Reader", ["metadb"]);
 var text = new _.text("text_reader", 10, 24, 0, 0);
 
 panel.item_focus_change();

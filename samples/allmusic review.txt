@@ -9,7 +9,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\text.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Allmusic review", ["metadb", "custom_font"]);
+var panel = new _.panel("Allmusic review", ["metadb"]);
 var text = new _.text("allmusic", 10, 24, 0, 0);
 
 panel.item_focus_change();

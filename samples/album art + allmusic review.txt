@@ -10,7 +10,7 @@
 // @import "%fb2k_profile_path%wsh_marc2003\js\text.js"
 // ==/PREPROCESSOR==
 
-var panel = new _.panel("Album Art + Allmusic Review", ["metadb", "custom_background", "custom_font"]);
+var panel = new _.panel("Album Art + Allmusic Review", ["metadb", "custom_background"]);
 var text = new _.text("allmusic", 10, 24, 0, 0);
 var albumart = new _.albumart(0, 0, 0, 0);
 
