@@ -872,10 +872,6 @@ _.mixin({
 						json : "toptags.tag",
 						display : "top tags"
 					}, {
-						method : "artist.getTopFans",
-						json : "topfans.user",
-						display : "top fans"
-					}, {
 						method : "artist.getTopAlbums",
 						json : "topalbums.album",
 						display : "top albums"
