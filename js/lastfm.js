@@ -3,8 +3,25 @@ _.mixin({
 		this.notify_data = function (name, data) {
 			switch (name) {
 			case "2K3.NOTIFY.LOVE":
-				if (this.ps_obj)
-					this.post(_.tf("%LASTFM_LOVED_DB%", data) == 1 ? "track.unlove" : "track.love", data);
+				if (this.ps_obj) {
+					switch (true) {
+					case this.api_key.length != 32:
+						panel.console("Last.fm API KEY not set.");
+						break;
+					case this.secret.length != 32:
+						panel.console("Last.fm SECRET not set.");
+						break;
+					case this.username.length == 0:
+						panel.console("Last.fm Username not set.");
+						break;
+					case this.sk.length != 32:
+						panel.console("Last.fm Password not set.");
+						break;
+					default:
+						this.post(_.tf("%LASTFM_LOVED_DB%", data) == 1 ? "track.unlove" : "track.love", data);
+						break;
+					}
+				}
 				break;
 			case "2K3.NOTIFY.LASTFM":
 				this.username = this.read_ini("username");
@@ -26,12 +43,6 @@ _.mixin({
 		}
 		
 		this.post = function (method, metadb) {
-			if (this.api_key.length != 32)
-				return panel.console("Last.fm API KEY not set.");
-			if (this.secret.length != 32)
-				return panel.console("Last.fm SECRET not set.");
-			if (this.username.length == 0)
-				return panel.console("Last.fm Username not set.");
 			switch (method) {
 			case "auth.getMobileSession":
 				var api_sig = md5("api_key" + this.api_key + "method" + method + "password" + this.password + "username" + this.username + this.secret);
@@ -39,10 +50,6 @@ _.mixin({
 				break;
 			case "track.love":
 			case "track.unlove":
-				if (!metadb)
-					return;
-				if (this.sk.length != 32)
-					return panel.console("Last.fm Password not set.");
 				var artist = _.tf("%artist%", metadb);
 				var track = _.tf("%title%", metadb);
 				if (!_.tagged(artist) || !_.tagged(track))
@@ -53,8 +60,6 @@ _.mixin({
 				var data = "sk=" + this.sk + "&artist=" + encodeURIComponent(artist) + "&track=" + encodeURIComponent(track);
 				break;
 			case "user.getRecommendedArtists":
-				if (this.sk.length != 32)
-					return panel.console("Last.fm Password not set.");
 				var api_sig = md5("api_key" + this.api_key + "limit250method" + method + "sk" + this.sk + this.secret);
 				var data = "limit=250&sk=" + this.sk;
 				break;
@@ -68,18 +73,11 @@ _.mixin({
 			this.xmlhttp.send(data);
 			this.xmlhttp.onreadystatechange = _.bind(function () {
 				if (this.xmlhttp.readyState == 4) {
-					if (this.xmlhttp.status == 200) {
+					//hack since new last.fm site went live
+					if (this.xmlhttp.status == 200 || method == "auth.getMobileSession")
 						this.success(method, metadb);
-					} else {
-						//should just be panel.console if last.fm was working properly
-						if (method == "auth.getMobileSession") {
-							var data = _.jsonParse(this.xmlhttp.responsetext);
-							if (data.error)
-								WshShell.popup(data.message, 0, panel.name, popup.stop);
-						} else {
-							panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
-						}
-					}
+					else
+						panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
 				}
 			}, this);
 		}
