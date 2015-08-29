@@ -54,7 +54,7 @@ _.mixin({
 				var track = _.tf("%title%", metadb);
 				if (!_.tagged(artist) || !_.tagged(track))
 					return;
-				panel.console("Attempting to " + (method == "track.love" ? "love \"" : "unlove \"") + track + "\" by \"" + artist + "\"");
+				panel.console("Attempting to " + (method == "track.love" ? "love " : "unlove ") + _.q(track) + " by " + _.q(artist));
 				panel.console("Contacting Last.fm....");
 				var api_sig = md5("api_key" + this.api_key + "artist" + artist + "method" + method + "sk" + this.sk + "track" + track + this.secret);
 				var data = "sk=" + this.sk + "&artist=" + encodeURIComponent(artist) + "&track=" + encodeURIComponent(track);

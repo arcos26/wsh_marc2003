@@ -259,7 +259,7 @@ _.mixin({
 		
 		this.lbtn_dblclk = function (x, y) {
 			if (this.image_xywh_trace(x, y))
-				_.run("\"" + this.files[this.image] + "\"");
+				_.run(this.files[this.image]);
 		}
 		
 		this.rbtn_up = function (x, y) {
@@ -362,12 +362,12 @@ _.mixin({
 				break;
 			case 4510:
 				if (this.images.length == 0)
-					_.run("\"" + this.folder + "\"");
+					_.run(this.folder);
 				else
 					_.explorer(this.files[this.image]);
 				break;
 			case 4511:
-				_.run("\"" + this.files[this.image] + "\"");
+				_.run(this.files[this.image]);
 				break;
 			case 4512:
 				this.delete_image();

@@ -86,7 +86,7 @@ _.mixin({
 				_.explorer(this.path);
 				break;
 			case _.isFile(this.path):
-				_.run("\"" + this.path + "\"");
+				_.run(this.path);
 				break;
 			}
 			return true;

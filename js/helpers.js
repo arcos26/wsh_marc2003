@@ -92,6 +92,9 @@ var ha_links = [
 ];
 
 _.mixin({
+	q : function (value) {
+		return "\"" + value + "\"";
+	},
 	img : function (value) {
 		return gdi.Image(folders.images + value);
 	},
@@ -211,8 +214,11 @@ _.mixin({
 			return (size / Math.pow(1024, 3)).toFixed(2) + " GB";
 		}
 	},
-	run : function (command) {
+	run : function (a, b) {
 		try {
+			var command = _.map(arguments, function (item) {
+				return _.q(item);
+			}).join(" ");
 			WshShell.Run(command);
 			return true;
 		} catch (e) {
@@ -227,13 +233,13 @@ _.mixin({
 	},
 	browser : function (url) {
 		if (_.isFile(ff_exe))
-			_.run("\"" + ff_exe + "\" " + url);
+			_.run(ff_exe, url);
 		else
 			_.run(url)
 	},
 	explorer : function (file) {
 		if (_.isFile(file))
-			_.run("explorer /select,\"" + file + "\"");
+			WshShell.Run("explorer /select," + _.q(file));
 	},
 	samples : function (metadb) {
 		return _.formatNumber(_.tf("['('%length_samples% samples')']", metadb), " ");
@@ -661,16 +667,16 @@ _.mixin({
 		case idx == 0:
 			break;
 		case idx < 30:
-			_.run("\"" + np_exe + "\" \"" + js_files[idx - 1] + "\"");
+			_.run(np_exe, js_files[idx - 1]);
 			break;
 		case idx > 39 && idx < 50:
-			_.run("\"" + np_exe + "\" \"" + doc_files[idx - 40] + "\"");
+			_.run(np_exe, doc_files[idx - 40]);
 			break;
 		case idx == 50:
-			_.run("\"" + np_exe + "\"");
+			_.run(np_exe);
 			break;
 		case idx == 51:
-			_.run("\"" + pe_exe + "\"");
+			_.run(pe_exe);
 			break;
 		case idx == 70:
 			window.ShowConfigure();

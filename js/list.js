@@ -176,11 +176,11 @@ _.mixin({
 				switch (true) {
 				case x > this.x && x < this.x + Math.min(this.data[this.index].width, this.text_width):
 					window.SetCursor(IDC_HAND);
-					_.tt("Run query \"" + this.data[this.index].name + "\"");
+					_.tt("Run query " + _.q(this.data[this.index].name));
 					break;
 				case x > this.x + this.w - 20 && x < this.x + this.w:
 					window.SetCursor(IDC_HAND);
-					_.tt("Edit \"" + this.data[this.index].name + "\"");
+					_.tt("Edit " + _.q(this.data[this.index].name));
 					break;
 				default:
 					window.SetCursor(IDC_ARROW);
