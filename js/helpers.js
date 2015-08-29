@@ -1,5 +1,3 @@
-//must import lodash.min.js before this
-
 var DT_LEFT = 0x00000000;
 var DT_CENTER = 0x00000001;
 var DT_RIGHT = 0x00000002;
@@ -42,6 +40,7 @@ var fso = new ActiveXObject("Scripting.FileSystemObject");
 var vb = new ActiveXObject("ScriptControl");
 vb.Language = "VBScript";
 
+var pe_exe = fb.ProfilePath.substring(0, 3) + "Applications\\ProcessExplorer\\procexp.exe";
 var np_exe = fb.ProfilePath.substring(0, 3) + "Applications\\Notepad++\\notepad++.exe";
 var ff_exe = WshShell.ExpandEnvironmentStrings("%USERPROFILE%") + "\\Documents\\FirefoxPortable\\FirefoxPortable.exe";
 
@@ -652,6 +651,10 @@ _.mixin({
 			m1.AppendMenuItem(MF_STRING, 50, "Notepad++");
 			m1.AppendMenuSeparator();
 		}
+		if (_.isFile(pe_exe)) {
+			m1.AppendMenuItem(MF_STRING, 51, "Process Explorer");
+			m1.AppendMenuSeparator();
+		}
 		m1.AppendMenuItem(MF_STRING, 70, "Configure...");
 		var idx = m1.TrackPopupMenu(x, y, flags);
 		switch (true) {
@@ -665,6 +668,9 @@ _.mixin({
 			break;
 		case idx == 50:
 			_.run("\"" + np_exe + "\"");
+			break;
+		case idx == 51:
+			_.run("\"" + pe_exe + "\"");
 			break;
 		case idx == 70:
 			window.ShowConfigure();
