@@ -96,7 +96,10 @@ _.mixin({
 		return "\"" + value + "\"";
 	},
 	img : function (value) {
-		return gdi.Image(folders.images + value);
+		if (_.isFile(value))
+			return gdi.Image(value);
+		else
+			return gdi.Image(folders.images + value);
 	},
 	nest : function (collection, keys) {
 		if (!keys.length) {

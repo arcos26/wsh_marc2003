@@ -409,9 +409,7 @@ _.mixin({
 				}
 			});
 			this.files = _.getFiles(this.folder, this.exts, this.sort == 0);
-			this.images = _.map(this.files, function (item) {
-				return gdi.Image(item);
-			});
+			this.images = _.map(this.files, _.img);
 			this.size(true);
 			window.Repaint();
 		}
