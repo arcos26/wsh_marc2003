@@ -216,10 +216,7 @@ _.mixin({
 	},
 	run : function (a, b) {
 		try {
-			var command = _.map(arguments, function (item) {
-				return _.q(item);
-			}).join(" ");
-			WshShell.Run(command);
+			WshShell.Run(_.map(arguments, _.q).join(" "));
 			return true;
 		} catch (e) {
 			return false;
@@ -280,9 +277,7 @@ _.mixin({
 			var lines = _.filter(temp_gr.EstimateLineWrap(paragraph, font, width).toArray(), function (item, i) {
 				return i % 2 == 0;
 			});
-			result.push.apply(result, _.map(lines, function (line) {
-				return _.trim(line);
-			}));
+			result.push.apply(result, _.map(lines, _.trim));
 		});
 		temp_bmp.ReleaseGraphics(temp_gr);
 		temp_bmp.Dispose();
