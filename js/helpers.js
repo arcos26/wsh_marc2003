@@ -253,14 +253,8 @@ _.mixin({
 	mbEscape : function (value) {
 		return value.replace(/[+!(){}\[\]^"~*?:\\\/-]/g, "\\$&");
 	},
-	mbTidy : function (value) {
-		return value.replace(/[\u2019]/g, "'").toLowerCase();
-	},
 	amTidy : function (value) {
 		return _.tfe("$replace($lower($ascii(" + _.fbEscape(value) + ")), & ,, and ,)", true);
-	},
-	echoTidy : function (value) {
-		return value.toString().replace(/\.\n/g, ".\n\n").replace(/\. \n/g, ".\n\n").replace(/\n\n\n/g, "\n\n");
 	},
 	textWidth : function (value, font) {
 		var temp_bmp = gdi.CreateImage(1, 1);
@@ -408,13 +402,6 @@ _.mixin({
 			} catch (e) {
 			}
 		}
-	},
-	isXP : function () {
-		var temp = new Enumerator(GetObject("winmgmts:\\\\.\\root\\CIMV2").ExecQuery("SELECT * FROM Win32_OperatingSystem", "WQL", 0x10 | 0x20)).item();
-		return temp.Caption.toLowerCase().indexOf("xp") > -1;
-	},
-	calculateBlendTarget : function (c) {
-		return (c & 0xFF) + ((c & 0xFF00) >> 8) + ((c & 0xFF0000) >> 16) >= 384 ? 0 : 0xFFFFFF;
 	},
 	input : function (prompt, title, value) {
 		var original = value;
