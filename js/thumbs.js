@@ -273,12 +273,9 @@ _.mixin({
 			panel.s11.CheckMenuRadioItem(4050, 4055, this.mode + 4050);
 			panel.s11.AppendMenuSeparator();
 			var flag = this.modes[this.mode] == "off" ? MF_GRAYED : MF_STRING;
-			panel.s11.AppendMenuItem(flag, 4175, "75px");
-			panel.s11.AppendMenuItem(flag, 4200, "100px");
-			panel.s11.AppendMenuItem(flag, 4250, "150px");
-			panel.s11.AppendMenuItem(flag, 4300, "200px");
-			panel.s11.AppendMenuItem(flag, 4350, "250px");
-			panel.s11.AppendMenuItem(flag, 4400, "300px");
+			_.forEach(this.pxs, function (item) {
+				panel.s11.AppendMenuItem(flag, item + 4100, item + "px");
+			});
 			panel.s11.CheckMenuRadioItem(4175, 4400, this.px + 4100);
 			panel.s11.AppendTo(panel.m, MF_STRING, "Thumbs");
 			panel.m.AppendMenuSeparator();
@@ -438,17 +435,18 @@ _.mixin({
 		_.createFolder(folders.artists);
 		this.mx = 0;
 		this.my = 0;
-		this.folder = "";
 		this.files = [];
 		this.images = [];
-		this.exts = "jpg|jpeg|png|gif";
 		this.modes = ["grid", "left", "right", "top", "bottom", "off"];
+		this.pxs = [75, 100, 150, 200, 250, 300];
 		this.mode = window.GetProperty("2K3.THUMBS.MODE", 4); //bottom
 		this.cycle = window.GetProperty("2K3.THUMBS.CYCLE", 0);
 		this.aspect = window.GetProperty("2K3.THUMBS.ASPECT", image.crop_top);
 		this.custom_folder_tf = window.GetProperty("2K3.THUMBS.CUSTOM.FOLDER.TF", "$directory_path(%path%)");
 		this.px = window.GetProperty("2K3.THUMBS.PX", 75);
 		this.sort = window.GetProperty("2k3.THUMBS.SORT", 0); //0 newest first 1 a-z
+		this.exts = "jpg|jpeg|png|gif";
+		this.folder = "";
 		this.img = null;
 		this.nc = false;
 		this.image = 0;
