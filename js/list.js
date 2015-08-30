@@ -333,7 +333,6 @@ _.mixin({
 				this.data.push(this.deleted_items[idx - 3010]);
 				this.deleted_items.splice(idx - 3010, 1);
 				this.save();
-				this.update();
 				break;
 			case 3050:
 			case 3051:
@@ -514,35 +513,36 @@ _.mixin({
 					}
 					break;
 				case 2:
-					if (lastfm.secret.length != 32) {
+					switch (true) {
+					case lastfm.secret.length != 32:
 						panel.console("Last.fm SECRET not set.");
 						break;
-					}
-					if (lastfm.username.length == 0) {
+					case lastfm.username.length == 0:
 						panel.console("Last.fm Username not set.");
 						break;
-					}
-					if (lastfm.sk.length != 32) {
+					case lastfm.sk.length != 32:
 						panel.console("Last.fm Password not set.");
 						break;
-					}
-					this.filename = folders.data + "lastfm\\" + lastfm.username + ".user.getRecommendedArtists.json";
-					if (_.isFile(this.filename)) {
-						var data = _.jsonParse(_.open(this.filename), "recommendations.artist");
-						if (_.isUndefined(data.length))
-							data = [data];
-						_.forEach(data, function (item) {
-							if (_.isUndefined(item.context.artist.length))
-								item.context.artist = [item.context.artist];
-							this.data.push({name : item.name, width : _.textWidth(item.name, panel.fonts.title), url : item.url});
-							this.data.push({name : "Similar to: " + _.map(item.context.artist, "name").join(", "), width : 0, url : ""});
-							this.data.push({name : "", width : 0, url : ""});
-						}, this);
-						this.items = this.data.length;
-						if (_.fileExpired(this.filename, ONE_DAY))
+					default:
+						this.filename = folders.data + "lastfm\\" + lastfm.username + ".user.getRecommendedArtists.json";
+						if (_.isFile(this.filename)) {
+							var data = _.jsonParse(_.open(this.filename), "recommendations.artist");
+							if (_.isUndefined(data.length))
+								data = [data];
+							_.forEach(data, function (item) {
+								if (_.isUndefined(item.context.artist.length))
+									item.context.artist = [item.context.artist];
+								this.data.push({name : item.name, width : _.textWidth(item.name, panel.fonts.title), url : item.url});
+								this.data.push({name : "Similar to: " + _.map(item.context.artist, "name").join(", "), width : 0, url : ""});
+								this.data.push({name : "", width : 0, url : ""});
+							}, this);
+							this.items = this.data.length;
+							if (_.fileExpired(this.filename, ONE_DAY))
+								lastfm.post("user.getRecommendedArtists");
+						} else {
 							lastfm.post("user.getRecommendedArtists");
-					} else {
-						lastfm.post("user.getRecommendedArtists");
+						}
+						break;
 					}
 					break;
 				}
@@ -737,6 +737,7 @@ _.mixin({
 			case "autoplaylists":
 				this.save = function () {
 					_.save(JSON.stringify(this.data, this.replacer), this.filename);
+					this.update();
 				}
 				
 				this.replacer = function (key, value) {
@@ -815,7 +816,6 @@ _.mixin({
 						this.deleted_items.unshift(this.data[z]);
 						this.data.splice(z, 1);
 						this.save();
-						this.update();
 						break;
 					}
 					this.editing = false;
@@ -823,9 +823,8 @@ _.mixin({
 				}
 				
 				this.edit_done = function (z) {
-					this.save();
 					this.run_query(this.data[z].name, this.data[z].query, this.data[z].sort, this.data[z].forced);
-					this.update();
+					this.save();
 				}
 				
 				this.run_query = function (n, q, s, f) {
