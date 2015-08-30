@@ -59,3 +59,5 @@ New **Status Bar** script displays playlist length, track count and total size. 
 **Thumbs** does not have any ability to download images. It only displays them from a custom folder.
 
 **Playcount sync** is not included.
+
+v6.3 30-08-2015
