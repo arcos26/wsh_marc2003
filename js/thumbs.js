@@ -224,16 +224,16 @@ _.mixin({
 			case this.modes[this.mode] == "grid":
 				if (this.overlay)
 					return window.SetCursor(this.close_btn.move(x, y) ? IDC_HAND : IDC_ARROW);
-				var temp = _.floor((x - this.x) / this.px);
-				this.index = temp >= this.columns ? this.images.length : temp + (_.floor((y - this.y) / this.px) * this.columns) + (this.offset * this.columns);
+				var temp = _.floor(x / this.px);
+				this.index = temp < this.columns ? temp + ((_.floor(y / this.px) + this.offset) * this.columns) : this.images.length;
 				break;
 			case this.modes[this.mode] == "left":
 			case this.modes[this.mode] == "right":
-				this.index = _.floor((y - this.y) / this.px) + this.offset;
+				this.index = _.floor(y / this.px) + this.offset;
 				break;
 			case this.modes[this.mode] == "top":
 			case this.modes[this.mode] == "bottom":
-				this.index = _.floor((x - this.x) / this.px) + this.offset;
+				this.index = _.floor(x / this.px) + this.offset;
 				break;
 			}
 			window.SetCursor(this.index < this.images.length ? IDC_HAND : IDC_ARROW);
