@@ -46,7 +46,7 @@ _.mixin({
 			switch (method) {
 			case "auth.getMobileSession":
 				var api_sig = md5("api_key" + this.api_key + "method" + method + "password" + this.password + "username" + this.username + this.secret);
-				var data = "password=" + this.password + "&username=" + this.username;
+				var data = "format=json&password=" + this.password + "&username=" + this.username;
 				break;
 			case "track.love":
 			case "track.unlove":
@@ -61,12 +61,12 @@ _.mixin({
 				break;
 			case "user.getRecommendedArtists":
 				var api_sig = md5("api_key" + this.api_key + "limit250method" + method + "sk" + this.sk + this.secret);
-				var data = "limit=250&sk=" + this.sk;
+				var data = "format=json&limit=250&sk=" + this.sk;
 				break;
 			default:
 				return;
 			}
-			data += "&format=json&method=" + method + "&api_key=" + this.api_key + "&api_sig=" + api_sig;
+			data += "&method=" + method + "&api_key=" + this.api_key + "&api_sig=" + api_sig;
 			this.xmlhttp.open("POST", "https://ws.audioscrobbler.com/2.0/", true);
 			this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			this.xmlhttp.setRequestHeader("User-Agent", this.ua);
