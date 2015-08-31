@@ -74,10 +74,12 @@ _.mixin({
 			this.xmlhttp.onreadystatechange = _.bind(function () {
 				if (this.xmlhttp.readyState == 4) {
 					//hack since new last.fm site went live
-					if (this.xmlhttp.status == 200 || method == "auth.getMobileSession")
+					if (this.xmlhttp.status == 200 || method == "auth.getMobileSession") {
 						this.success(method, metadb);
-					else
-						panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
+					} else {
+						panel.console("HTTP error: " + this.xmlhttp.status);
+						this.xmlhttp.responsetext && panel.console(this.xmlhttp.responsetext);
+					}
 				}
 			}, this);
 		}

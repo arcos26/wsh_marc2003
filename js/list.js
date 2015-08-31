@@ -659,10 +659,12 @@ _.mixin({
 			this.xmlhttp.send();
 			this.xmlhttp.onreadystatechange = _.bind(function () {
 				if (this.xmlhttp.readyState == 4) {
-					if (this.xmlhttp.status == 200)
+					if (this.xmlhttp.status == 200) {
 						this.success(f);
-					else
-						panel.console(this.xmlhttp.responsetext || "HTTP error: " + this.xmlhttp.status);
+					} else {
+						panel.console("HTTP error: " + this.xmlhttp.status);
+						this.xmlhttp.responsetext && panel.console(this.xmlhttp.responsetext);
+					}
 				}
 			}, this);
 		}
