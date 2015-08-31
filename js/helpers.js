@@ -217,7 +217,7 @@ _.mixin({
 			return (size / Math.pow(1024, 3)).toFixed(2) + " GB";
 		}
 	},
-	run : function (a, b) {
+	run : function () {
 		try {
 			WshShell.Run(_.map(arguments, _.q).join(" "));
 			return true;
