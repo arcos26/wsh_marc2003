@@ -40,8 +40,9 @@ var fso = new ActiveXObject("Scripting.FileSystemObject");
 var vb = new ActiveXObject("ScriptControl");
 vb.Language = "VBScript";
 
-var pe_exe = fb.ProfilePath.substring(0, 3) + "Applications\\ProcessExplorer\\procexp.exe";
-var np_exe = fb.ProfilePath.substring(0, 3) + "Applications\\Notepad++\\notepad++.exe";
+var drive = fb.ProfilePath.substring(0, 3);
+var pe_exe = drive + "Applications\\ProcessExplorer\\procexp.exe";
+var np_exe = drive + "Applications\\Notepad++\\notepad++.exe";
 var ff_exe = WshShell.ExpandEnvironmentStrings("%USERPROFILE%") + "\\Documents\\FirefoxPortable\\FirefoxPortable.exe";
 
 var tooltip = window.CreateTooltip();
@@ -55,6 +56,7 @@ folders.settings = fb.ProfilePath + "wsh_settings\\";
 folders.data = fb.ProfilePath + "wsh_data\\";
 folders.artists = folders.data + "artists\\";
 folders.docs = fb.ComponentPath + "docs\\";
+folders.git = drive + "Applications\\GitPortable\\App\\Git\\";
 
 var guifx = {
 	font : "Guifx v2 Transports",
@@ -646,6 +648,10 @@ _.mixin({
 			m1.AppendMenuItem(MF_STRING, 51, "Process Explorer");
 			m1.AppendMenuSeparator();
 		}
+		if (_.isFolder(folders.git)) {
+			m1.AppendMenuItem(MF_STRING, 52, "Git Folder");
+			m1.AppendMenuSeparator();
+		}
 		m1.AppendMenuItem(MF_STRING, 70, "Configure...");
 		var idx = m1.TrackPopupMenu(x, y, flags);
 		switch (true) {
@@ -662,6 +668,9 @@ _.mixin({
 			break;
 		case idx == 51:
 			_.run(pe_exe);
+			break;
+		case idx == 52:
+			_.run(folders.git);
 			break;
 		case idx == 70:
 			window.ShowConfigure();
